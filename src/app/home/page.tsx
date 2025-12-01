@@ -34,7 +34,6 @@ const HomeSection = () => {
 
 
       <Navbar />
-
       <Introsection />
       <Aboutsection />
       <SkillsSection />
