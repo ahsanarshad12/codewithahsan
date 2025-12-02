@@ -85,7 +85,7 @@ const Navbar = () => {
             transition: {
                 delay: i * 0.05,
                 duration: 0.3,
-                ease: "easeInOut"
+                ease: [0.25, 0.46, 0.45, 0.94]
             }
         })
     };
@@ -148,7 +148,7 @@ const Navbar = () => {
                                     <motion.button
                                         key={item.id}
                                         custom={index}
-                                        variants={itemVariants}
+
                                         initial="hidden"
                                         animate="visible"
                                         whileHover={{ scale: 1.05 }}
