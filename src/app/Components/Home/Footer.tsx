@@ -346,11 +346,11 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <a href="#" className="text-gray-500 hover:text-cyan-400 text-sm transition-colors">
+            <a href="/privacy" className="text-gray-500 hover:text-cyan-400 text-sm transition-colors">
               Privacy Policy
             </a>
             <span className="text-gray-700">•</span>
-            <a href="#" className="text-gray-500 hover:text-cyan-400 text-sm transition-colors">
+            <a href="/terms" className="text-gray-500 hover:text-cyan-400 text-sm transition-colors">
               Terms of Service
             </a>
           </div>
