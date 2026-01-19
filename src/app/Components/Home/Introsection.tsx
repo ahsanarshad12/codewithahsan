@@ -1,5 +1,5 @@
-import { FaGithub, FaLinkedinIn, FaTwitter, FaEnvelope, FaArrowDown, } from 'react-icons/fa';
-import { SiNextdotjs, SiReact, SiTailwindcss, SiNodedotjs } from 'react-icons/si';
+import { FaGithub, FaLinkedinIn, FaTwitter, FaEnvelope, } from 'react-icons/fa';
+import { SiNextdotjs, SiJavascript, SiTailwindcss, SiLaravel } from 'react-icons/si';
 import { CiSaveDown1 } from "react-icons/ci";
 
 import Image from "next/image";
@@ -13,14 +13,14 @@ const HeroSection = () => {
     ];
 
     const techStack = [
-        { icon: SiNextdotjs, name: "Next.js", color: "text-black" },
-        { icon: SiReact, name: "React", color: "text-cyan-400" },
+        { icon: SiNextdotjs, name: "Next.js", color: "text-white" },
         { icon: SiTailwindcss, name: "Tailwind", color: "text-teal-400" },
-        { icon: SiNodedotjs, name: "Node.js", color: "text-green-500" },
+        { icon: SiJavascript, name: "Javascript", color: "text-yellow-300" },
+        { icon: SiLaravel, name: "Laravel", color: "text-red-500" },
     ];
 
     return (
-        <section id="home" className=" relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-950  ">
+        <section id="home" className=" relative overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-950  ">
             {/* Abstract Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
                 {/* Geometric Grid */}
@@ -49,7 +49,7 @@ const HeroSection = () => {
             </div>
 
             {/* Main Content */}
-            <div className="relative z-10  mt-30 sm:mt-20  ">
+            <div className="relative z-10  mt-30 sm:mt-40  ">
                 <div className="flex flex-col lg:flex-row  items-center justify-between w-full max-w-400 mx-auto px-4 md:px-22">
                     {/* Left Column - Content */}
                     <div className="space-y-8">
@@ -128,7 +128,7 @@ const HeroSection = () => {
                             {/* Main Image Card */}
                             <div className="relative rounded-2xl overflow-hidden border border-gray-800 bg-gradient-to-br from-gray-900 to-black shadow-2xl">
                                 <Image
-                                    src="/profile.webp"
+                                    src="/profile.jpeg"
                                     alt="Ahsan Arshad - Full Stack Developer"
                                     width={600}
                                     height={400}
@@ -180,7 +180,7 @@ const HeroSection = () => {
                 </div>
 
                 {/* Social Links & Scroll Indicator */}
-                <div className="mt-6 lg:mt-4 flex flex-col items-center space-y-8">
+                <div className="mt-6 lg:mt-4 m-10 flex flex-col items-center space-y-8">
                     {/* Social Links */}
                     <div className="flex gap-4">
                         {socialLinks.map((link, index) => (

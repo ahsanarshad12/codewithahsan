@@ -51,3 +51,42 @@
 .animate-smoothUpDown {
   animation: smoothUpDown 3s ease-in-out infinite;
 }
+
+/* Global CSS file (e.g., globals.css) */
+
+/* Keyframe animations */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spinSlow {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animation classes */
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-spinSlow {
+  animation: spinSlow 8s linear infinite;
+}
+
+/* Example: multiple animations on one element */
+.animate-float-spin {
+  animation: float 4s ease-in-out infinite, spinSlow 8s linear infinite;
+}

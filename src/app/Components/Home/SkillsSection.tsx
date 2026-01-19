@@ -3,9 +3,6 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {
-  FaHtml5,
-  FaCss3Alt,
-  FaBootstrap,
   FaJs,
   FaPhp,
   FaGitAlt,
@@ -15,7 +12,7 @@ import {
   FaDatabase,
   FaPaintBrush,
 } from "react-icons/fa";
-import { SiMysql, SiTailwindcss, SiNextdotjs, SiReact, SiNodedotjs, SiTypescript, SiFigma, SiVercel } from "react-icons/si";
+import { SiTailwindcss, SiNextdotjs, SiReact, SiNodedotjs, SiTypescript, SiFigma, SiVercel } from "react-icons/si";
 
 const skills = [
   {

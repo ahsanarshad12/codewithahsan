@@ -58,11 +58,11 @@ const Navbar = () => {
 
     const navItems = [
         { id: 'home', icon: <FaHome />, text: 'Home', color: 'from-blue-400 to-cyan-400' },
-        { id: 'about', icon: <FaUser />, text: 'About', color: 'from-purple-400 to-pink-400' },
-        { id: 'skills', icon: <FaCode />, text: 'Skills', color: 'from-green-400 to-emerald-400' },
-        { id: 'experience', icon: <FaBriefcase />, text: 'Experience', color: 'from-amber-400 to-orange-400' },
-        { id: 'portfolio', icon: <FaLaptopCode />, text: 'Projects', color: 'from-cyan-400 to-blue-400' },
-        { id: 'hire', icon: <FaEnvelope />, text: 'Contact', color: 'from-red-400 to-pink-400' }
+        { id: 'about', icon: <FaUser />, text: 'About', color: 'from-blue-400 to-cyan-400' },
+        { id: 'skills', icon: <FaCode />, text: 'Skills', color: 'from-blue-400 to-cyan-400' },
+        { id: 'experience', icon: <FaBriefcase />, text: 'Experience', color: 'from-blue-400 to-cyan-400' },
+        { id: 'portfolio', icon: <FaLaptopCode />, text: 'Projects', color: 'from-blue-400 to-cyan-400' },
+        { id: 'hire', icon: <FaEnvelope />, text: 'Contact', color: 'from-blue-400 to-cyan-400' }
     ];
 
     const containerVariants = {
@@ -128,18 +128,9 @@ const Navbar = () => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => scrollToSection('home')}
-                                className="group flex items-center gap-3 px-4 py-2.5 rounded-xl bg-gray-800/50 hover:bg-gray-800/70 border border-gray-700/50 hover:border-cyan-500/30 transition-all duration-300"
+                                className="group flex items-center gap-3 px-4  rounded-xl bg-white/20 transition-all duration-300"
                             >
-                                <div className="relative">
-                                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg blur opacity-30 group-hover:opacity-50" />
-                                    <div className="relative p-2 rounded-lg bg-gradient-to-br from-gray-900 to-black">
-                                        <FaRocket className="w-4 h-4 text-cyan-400" />
-                                    </div>
-                                </div>
-                                <div className="text-left">
-                                    <div className="text-sm font-bold text-white">Ahsan</div>
-                                    <div className="text-xs text-cyan-400">Developer</div>
-                                </div>
+                                <img src="/logo.png" alt="" className='w-full max-w-20' />
                             </motion.button>
 
                             {/* Desktop Navigation */}

@@ -12,45 +12,45 @@ const AboutSection = () => {
             gradient: "from-blue-500/10 to-cyan-500/10",
             border: "hover:border-blue-500/50"
         },
-        {
-            icon: FaBriefcase,
-            label: "Role",
-            value: "Full Stack Developer",
-            gradient: "from-purple-500/10 to-pink-500/10",
-            border: "hover:border-purple-500/50"
-        },
+        // {
+        //     icon: FaBriefcase,
+        //     label: "Role",
+        //     value: "Full Stack Developer",
+        //     gradient: "from-blue-500/10 to-cyan-500/10",
+        //     border: "hover:border-blue-500/50"
+        // },
         {
             icon: FaEnvelope,
             label: "Email",
-            value: "hi@ahsanarshad.com",
-            gradient: "from-red-500/10 to-orange-500/10",
-            border: "hover:border-red-500/50"
+            value: "ahsanarshad291@gmail.com",
+            gradient: "from-blue-500/10 to-cyan-500/10",
+            border: "hover:border-blue-500/50"
         },
         {
             icon: FaPhone,
             label: "Contact",
             value: "+92 301 3421018",
-            gradient: "from-green-500/10 to-emerald-500/10",
-            border: "hover:border-green-500/50"
+            gradient: "from-blue-500/10 to-cyan-500/10",
+            border: "hover:border-blue-500/50"
         },
-        {
-            icon: FaMapMarkerAlt,
-            label: "Location",
-            value: "Rahim Yar Khan, Pakistan",
-            gradient: "from-amber-500/10 to-yellow-500/10",
-            border: "hover:border-amber-500/50"
-        },
-        {
-            icon: FaGlobe,
-            label: "Timezone",
-            value: "GMT+5 (PKT)",
-            gradient: "from-indigo-500/10 to-violet-500/10",
-            border: "hover:border-indigo-500/50"
-        }
+        // {
+        //     icon: FaMapMarkerAlt,
+        //     label: "Location",
+        //     value: "Rahim Yar Khan, Pakistan",
+        //     gradient: "from-blue-500/10 to-cyan-500/10",
+        //     border: "hover:border-blue-500/50"
+        // },
+        // {
+        //     icon: FaGlobe,
+        //     label: "Timezone",
+        //     value: "GMT+5 (PKT)",
+        //     gradient: "from-blue-500/10 to-cyan-500/10",
+        //     border: "hover:border-blue-500/50"
+        // }
     ];
 
     return (
-        <section id="about" className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-950 py-20">
+        <section id="about" className="relative  overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-950 py-20">
             <div className="w-full max-w-400 mx-auto  px-4 md:px-12" >
                 {/* Abstract Background Elements */}
                 <div className="absolute inset-0 overflow-hidden">
@@ -106,7 +106,7 @@ const AboutSection = () => {
                     </div>
 
                     {/* Main Content Grid */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                    <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-10 lg:gap-0 items-start">
                         {/* Left Column - Image & Tech */}
                         <div className="relative ">
                             {/* Glow Effect */}

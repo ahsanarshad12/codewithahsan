@@ -48,7 +48,7 @@ const allProjects = [
       { icon: <div className="w-4 h-4 bg-cyan-500 rounded" />, name: "Tailwind", color: "text-cyan-400" },
       { icon: <div className="w-4 h-4 bg-blue-500 rounded" />, name: "React", color: "text-blue-400" }
     ],
-    image: "/project-wms.jpeg",
+    image: "",
     demo: "#",
     featured: true
   },
@@ -62,7 +62,7 @@ const allProjects = [
       { icon: <div className="w-4 h-4 bg-blue-700 rounded" />, name: "MySQL", color: "text-blue-300" },
       { icon: <SiBootstrap className="w-4 h-4" />, name: "Bootstrap", color: "text-purple-400" }
     ],
-    image: "/project-autoparts.jpeg",
+    image: "",
     demo: "#",
     featured: false
   },
@@ -76,7 +76,7 @@ const allProjects = [
       { icon: <SiJavascript className="w-4 h-4" />, name: "JavaScript", color: "text-yellow-400" },
       { icon: <SiBootstrap className="w-4 h-4" />, name: "Bootstrap", color: "text-purple-400" }
     ],
-    image: "/project-saas.jpeg",
+    image: "",
     demo: "#",
     featured: false
   },
@@ -90,7 +90,7 @@ const allProjects = [
       { icon: <div className="w-4 h-4 bg-cyan-500 rounded" />, name: "Tailwind", color: "text-cyan-400" },
       { icon: <SiJavascript className="w-4 h-4" />, name: "TypeScript", color: "text-blue-500" }
     ],
-    image: "/project-portfolio.jpeg",
+    image: "",
     demo: "#",
     featured: false
   },
@@ -158,8 +158,8 @@ const PortfolioSection = () => {
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={`group relative px-6 py-3 rounded-xl font-medium text-sm transition-all duration-300 ${activeCategory === cat
-                  ? "text-white"
-                  : "text-gray-400 hover:text-white"
+                ? "text-white"
+                : "text-gray-400 hover:text-white"
                 }`}
             >
               <span className="relative z-10">{cat}</span>
