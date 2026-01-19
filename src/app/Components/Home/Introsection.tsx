@@ -50,7 +50,7 @@ const HeroSection = () => {
 
             {/* Main Content */}
             <div className="relative z-10  mt-30 sm:mt-40  ">
-                <div className="flex flex-col lg:flex-row  items-center justify-between w-full max-w-400 mx-auto px-4 md:px-22">
+                <div className="flex flex-col lg:flex-row  items-center justify-between w-full max-w-400 mx-auto px-4 md:px-22 gap-6 lg:gap-0">
                     {/* Left Column - Content */}
                     <div className="space-y-8">
                         {/* Badge */}
@@ -145,7 +145,7 @@ const HeroSection = () => {
                                         <div className="flex items-center justify-between p-4 rounded-xl bg-gray-900/80 backdrop-blur-sm border border-gray-800/50">
                                             <div>
                                                 <p className="text-sm text-gray-400">Currently Working On</p>
-                                                <p className="text-lg font-bold text-white">AI-Powered SaaS Platform</p>
+                                                <p className="text-[12px] lg:text-lg font-bold text-white">AI-Powered SaaS Platform</p>
                                             </div>
                                             <div className="px-3 py-1 rounded-full bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30">
                                                 <span className="text-sm font-medium text-cyan-300">Next.js 14</span>
@@ -156,7 +156,7 @@ const HeroSection = () => {
                             </div>
 
                             {/* Floating Elements */}
-                            <div className="absolute -top-6 -right-6 w-32 h-32">
+                            <div className="absolute -top-6 right-0 lg:-right-6 lg:w-32 lg:h-32">
                                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-2xl blur-xl animate-pulse" />
                                 <div className="relative p-4 rounded-xl bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 shadow-xl">
                                     <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
@@ -166,7 +166,7 @@ const HeroSection = () => {
                                 </div>
                             </div>
 
-                            <div className="absolute bottom-24 -left-6 w-22 h-22">
+                            <div className="absolute bottom-24 -left-6 lg:w-22 lg:h-22">
                                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl blur-xl animate-pulse delay-500" />
                                 <div className="relative p-4 rounded-xl bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 shadow-xl">
                                     <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
