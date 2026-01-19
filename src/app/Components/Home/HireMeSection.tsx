@@ -39,7 +39,6 @@ const HireMeSection = () => {
     "Portfolio Website",
     "SaaS Platform",
     "API Development",
-    "UI/UX Design",
     "Other"
   ];
 
@@ -208,8 +207,8 @@ const HireMeSection = () => {
               className="mb-8 max-w-2xl mx-auto"
             >
               <div className={`p-6 rounded-2xl backdrop-blur-sm border ${submitStatus === "success"
-                  ? "bg-gradient-to-br from-green-500/20 to-emerald-500/10 border-green-500/30"
-                  : "bg-gradient-to-br from-red-500/20 to-pink-500/10 border-red-500/30"
+                ? "bg-gradient-to-br from-green-500/20 to-emerald-500/10 border-green-500/30"
+                : "bg-gradient-to-br from-red-500/20 to-pink-500/10 border-red-500/30"
                 }`}>
                 <div className="flex items-center gap-4">
                   {submitStatus === "success" ? (
@@ -409,8 +408,8 @@ const HireMeSection = () => {
                       type="submit"
                       disabled={isSubmitting}
                       className={`w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 flex items-center justify-center gap-3 ${isSubmitting
-                          ? "bg-gray-700 cursor-not-allowed"
-                          : "bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 shadow-lg hover:shadow-amber-500/25"
+                        ? "bg-gray-700 cursor-not-allowed"
+                        : "bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 shadow-lg hover:shadow-amber-500/25"
                         }`}
                     >
                       {isSubmitting ? (

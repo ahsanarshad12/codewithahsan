@@ -69,15 +69,15 @@ const skills = [
     gradient: "from-yellow-900/20 to-yellow-800/10",
     border: "border-yellow-800/30"
   },
-  {
-    icon: <SiNodedotjs className="w-8 h-8" />,
-    title: "Node.js",
-    level: "Intermediate",
-    desc: "Express.js, REST APIs, Authentication",
-    color: "text-green-500",
-    gradient: "from-green-900/20 to-green-800/10",
-    border: "border-green-800/30"
-  },
+  // {
+  //   icon: <SiNodedotjs className="w-8 h-8" />,
+  //   title: "Node.js",
+  //   level: "Intermediate",
+  //   desc: "Express.js, REST APIs, Authentication",
+  //   color: "text-green-500",
+  //   gradient: "from-green-900/20 to-green-800/10",
+  //   border: "border-green-800/30"
+  // },
   {
     icon: <FaDatabase className="w-8 h-8" />,
     title: "MySQL",
@@ -105,15 +105,15 @@ const skills = [
     gradient: "from-orange-900/20 to-orange-800/10",
     border: "border-orange-800/30"
   },
-  {
-    icon: <SiFigma className="w-8 h-8" />,
-    title: "UI/UX Design",
-    level: "Intermediate",
-    desc: "Wireframing, Prototyping, Design Systems",
-    color: "text-pink-500",
-    gradient: "from-pink-900/20 to-pink-800/10",
-    border: "border-pink-800/30"
-  },
+  // {
+  //   icon: <SiFigma className="w-8 h-8" />,
+  //   title: "UI/UX Design",
+  //   level: "Intermediate",
+  //   desc: "Wireframing, Prototyping, Design Systems",
+  //   color: "text-pink-500",
+  //   gradient: "from-pink-900/20 to-pink-800/10",
+  //   border: "border-pink-800/30"
+  // },
   {
     icon: <SiVercel className="w-8 h-8" />,
     title: "Deployment",
@@ -229,7 +229,7 @@ const SkillsSection = () => {
         </div>
 
         {/* Expertise Areas */}
-        <div className="mt-20 lg:mt-24" data-aos="fade-up" data-aos-delay="400">
+        {/* <div className="mt-20 lg:mt-24 items-center justify-center" data-aos="fade-up" data-aos-delay="400">
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-3 gap-8">
               <div className="text-center p-8 rounded-2xl bg-gray-900/30 backdrop-blur-sm border border-gray-800/50">
@@ -263,7 +263,7 @@ const SkillsSection = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Tech Stack Statement */}
         <div className="mt-16 text-center" data-aos="fade-up" data-aos-delay="600">

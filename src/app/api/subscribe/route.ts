@@ -3,27 +3,27 @@ import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 export async function POST(request: NextRequest) {
-    try {
-        const { email } = await request.json();
+  try {
+    const { email } = await request.json();
 
-        if (!email) {
-            return NextResponse.json(
-                { error: 'Email is required' },
-                { status: 400 }
-            );
-        }
+    if (!email) {
+      return NextResponse.json(
+        { error: 'Email is required' },
+        { status: 400 }
+      );
+    }
 
-        // Gmail SMTP transporter
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL_USER, // Your Gmail
-                pass: process.env.EMAIL_PASS, // App Password (not regular password)
-            },
-        });
+    // Gmail SMTP transporter
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER, // Your Gmail
+        pass: process.env.EMAIL_PASS, // App Password (not regular password)
+      },
+    });
 
-        // Email template with your services
-        const servicesEmailTemplate = `
+    // Email template with your services
+    const servicesEmailTemplate = `
     <!DOCTYPE html>
     <html>
     <head>
@@ -131,24 +131,24 @@ export async function POST(request: NextRequest) {
     </html>
     `;
 
-        // Send email
-        await transporter.sendMail({
-            from: `"Ahsan Arshad" <${process.env.EMAIL_USER}>`,
-            to: email,
-            subject: '🚀 Welcome! Here are My Services - Ahsan Arshad',
-            html: servicesEmailTemplate,
-        });
+    // Send email
+    await transporter.sendMail({
+      from: `"Ahsan Arshad" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: '🚀 Welcome! Here are My Services - CodeWithAhsan',
+      html: servicesEmailTemplate,
+    });
 
-        return NextResponse.json(
-            { message: 'Subscription successful! Check your email.' },
-            { status: 200 }
-        );
+    return NextResponse.json(
+      { message: 'Subscription successful! Check your email.' },
+      { status: 200 }
+    );
 
-    } catch (error) {
-        console.error('Email error:', error);
-        return NextResponse.json(
-            { error: 'Failed to send email' },
-            { status: 500 }
-        );
-    }
+  } catch (error) {
+    console.error('Email error:', error);
+    return NextResponse.json(
+      { error: 'Failed to send email' },
+      { status: 500 }
+    );
+  }
 }

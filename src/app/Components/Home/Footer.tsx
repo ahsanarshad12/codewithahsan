@@ -165,7 +165,7 @@ const Footer = () => {
             <h4 className="text-lg font-bold text-white mb-6 pb-3 border-b border-gray-800/50">
               Get In Touch
             </h4>
-            <div className="space-y-4">
+            <div className=" grid grid-cols-1 lg:grid-cols-2 gap-2">
               <a
                 href="mailto:ahsanarshad291@gmail.com"
                 className="flex items-center gap-4 p-3 rounded-xl bg-gray-900/30 backdrop-blur-sm border border-gray-800/50 hover:border-cyan-500/30 transition-all duration-300 group"

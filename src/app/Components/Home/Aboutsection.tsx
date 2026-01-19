@@ -175,7 +175,7 @@ const AboutSection = () => {
                             {/* CTA Button */}
                             <div className="pt-4 mt-4">
                                 <a
-                                    href="mailto:hi@ahsanarshad.com"
+                                    href="mailto:ahsanarshad291@gmail.com"
                                     className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl font-semibold text-white shadow-2xl shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105"
                                 >
                                     <span>Let's Build Together</span>

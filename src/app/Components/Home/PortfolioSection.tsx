@@ -6,6 +6,8 @@ import Image from "next/image";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
 import { SiBootstrap, SiJavascript, SiHtml5, SiCss3 } from "react-icons/si";
 import { FaEye, FaCode } from "react-icons/fa";
+import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri";
+import { TbBrandLaravel } from "react-icons/tb";
 
 const allProjects = [
   {
@@ -41,15 +43,15 @@ const allProjects = [
   {
     id: 3,
     category: "Full Stack",
-    title: "Warehouse Management",
-    description: "Next.js 14 based warehouse system with real-time inventory tracking and management dashboard.",
+    title: "DigitalBar",
+    description: "A modern, professional website showcasing DigitalBar’s services with user-friendly design and optimized performance, developed under G-Techsolution.",
     tech: [
-      { icon: <div className="w-4 h-4 bg-black rounded" />, name: "Next.js 14", color: "text-white" },
-      { icon: <div className="w-4 h-4 bg-cyan-500 rounded" />, name: "Tailwind", color: "text-cyan-400" },
-      { icon: <div className="w-4 h-4 bg-blue-500 rounded" />, name: "React", color: "text-blue-400" }
+      { icon: <RiNextjsFill className="w-4 h-4  " />, name: "Next.js 14", color: "text-white" },
+      { icon: <RiTailwindCssFill className="w-4 h-4 " />, name: "Tailwind", color: "text-cyan-400" },
+      { icon: <TbBrandLaravel className="w-4 h-4 " />, name: "Laravel", color: "text-red-600" }
     ],
-    image: "",
-    demo: "#",
+    image: "/digitalbar-cover.png",
+    demo: "https://digitalbar.com.au/",
     featured: true
   },
   {
@@ -296,7 +298,7 @@ const PortfolioSection = () => {
               Let's collaborate to build something amazing together.
             </p>
             <a
-              href="#contact"
+              href="#hire"
               className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl font-semibold text-white shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 transition-all duration-300 hover:scale-105"
             >
               Start a Project
