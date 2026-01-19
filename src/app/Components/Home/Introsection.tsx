@@ -7,9 +7,9 @@ import Image from "next/image";
 const HeroSection = () => {
     const socialLinks = [
         { icon: FaGithub, href: "https://github.com/ahsanarshad", label: "GitHub", color: "from-gray-800 to-gray-900" },
-        { icon: FaLinkedinIn, href: "https://linkedin.com/in/ahsanarshad", label: "LinkedIn", color: "from-blue-700 to-blue-600" },
-        { icon: FaTwitter, href: "https://twitter.com/ahsanarshaddev", label: "Twitter", color: "from-sky-500 to-blue-500" },
-        { icon: FaEnvelope, href: "mailto:hi@ahsanarshad.com", label: "Email", color: "from-red-500 to-pink-500" },
+        { icon: FaLinkedinIn, href: "https://www.linkedin.com/in/ahsanarshad-?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", label: "LinkedIn", color: "from-blue-700 to-blue-600" },
+        // { icon: FaTwitter, href: "https://twitter.com/ahsanarshaddev", label: "Twitter", color: "from-sky-500 to-blue-500" },
+        { icon: FaEnvelope, href: "mailto:ahsanarshad291@gmail.com", label: "Email", color: "from-red-500 to-pink-500" },
     ];
 
     const techStack = [
