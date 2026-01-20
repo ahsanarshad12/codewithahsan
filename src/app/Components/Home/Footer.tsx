@@ -139,12 +139,7 @@ const Footer = () => {
           {/* Brand */}
           <div data-aos="fade-up">
             <div className="flex items-center gap-4 mb-6">
-              <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/10 border border-cyan-500/30">
-                <SiNextdotjs className="w-6 h-6 text-cyan-400" />
-              </div>
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Ahsan Arshad
-              </h3>
+              <img src="/logo.png" alt="" className='w-full max-w-20 bg-white rounded p-2 shadow-2xl ' />
             </div>
             <p className="text-gray-400 mb-6 max-w-lg leading-relaxed">
               Full-stack developer crafting exceptional digital experiences with modern web technologies.
@@ -152,7 +147,7 @@ const Footer = () => {
 
             {/* Tech Stack */}
             <div className="flex flex-wrap gap-3">
-              {['Next.js', 'Laravel', 'Tailwind', 'JavaScript'].map((tech, i) => (
+              {['Next.js', 'React.js', 'Laravel', 'Tailwind', 'JavaScript', 'TypeScript'].map((tech, i) => (
                 <div key={i} className="px-4 py-2 rounded-lg bg-gray-800/50 backdrop-blur-sm border border-gray-700/50">
                   <span className="text-sm font-medium text-cyan-300">{tech}</span>
                 </div>
@@ -218,12 +213,12 @@ const Footer = () => {
             <h4 className="text-lg font-bold text-white mb-6 pb-3 border-b border-gray-800/50">
               Navigation
             </h4>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
               {quickLinks.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className="text-left p-3 rounded-lg bg-gray-900/30 backdrop-blur-sm border border-gray-800/50 hover:border-cyan-500/30 hover:bg-gray-800/30 transition-all duration-300 group"
+                  className="text-center cursor-pointer p-3 rounded-lg bg-gray-900/30 backdrop-blur-sm border border-gray-800/50 hover:border-cyan-500/30 hover:bg-gray-800/30 transition-all duration-300 group"
                 >
                   <span className="text-gray-400 text-sm group-hover:text-cyan-300 transition-colors">
                     {link.name}
@@ -238,7 +233,7 @@ const Footer = () => {
             <h4 className="text-lg font-bold text-white mb-6 pb-3 border-b border-gray-800/50">
               Services
             </h4>
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
               {services.map((service, index) => (
                 <div
                   key={index}

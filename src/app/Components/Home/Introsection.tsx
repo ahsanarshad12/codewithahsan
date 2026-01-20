@@ -109,7 +109,7 @@ const HeroSection = () => {
                             </a>
 
                             <a
-                                href="mailto:hi@ahsanarshad.com"
+                                href="mailto:ahsanarshad291@gmail.com"
                                 className="group inline-flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-white border border-gray-700 hover:border-gray-600 transition-all duration-300"
                             >
                                 <span>Get In Touch</span>

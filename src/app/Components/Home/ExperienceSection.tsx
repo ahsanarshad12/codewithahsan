@@ -11,14 +11,14 @@ import {
   FaCode,
   FaChevronDown
 } from "react-icons/fa";
-import { SiNextdotjs, SiLaravel, SiTailwindcss, SiJavascript, SiTypescript, SiReact, SiMysql, SiBootstrap } from "react-icons/si";
+import { SiNextdotjs, SiLaravel, SiTailwindcss, SiJavascript, SiTypescript, SiReact, SiMysql, SiBootstrap, SiVite } from "react-icons/si";
 
 const experiences = [
   {
     id: 1,
     title: "DigitalBar Website Development",
     project: "At G-Tech Solution",
-    company: "Completed under G-Tech Solution company",
+    company: "Completed under G-Tech Solution",
     duration: "March 2025 - April 2025",
     description: [
       "Modern & Responsive Design: Works seamlessly on desktop and mobile.",
@@ -36,42 +36,65 @@ const experiences = [
   },
   {
     id: 2,
-    title: "Full Stack Developer",
+    title: "G-Tech Partner",
     project: "SaaS Business Platform",
-    company: "G-Tech Solution",
-    duration: "April 2025 – July 2025",
+    company: "Completed under G-Tech Solution",
+    duration: "April 2025 - July 2025",
     description: [
-      "Built modular SaaS platform with reusable component architecture",
-      "Implemented responsive layouts using modern CSS frameworks",
-      "Developed business automation features and workflows",
-      "Enhanced application performance and user experience"
+      "Provides a centralized platform for G-Tech Solutions partners to access tools and resources",
+      "Helps manage partner relationships, workflows, and project coordination",
+      "Designed for secure and professional B2B collaboration",
+      "Supports G-Tech Solutions IT, software, and digital service operations"
     ],
-    technologies: ["JavaScript", "Bootstrap", "Laravel", "REST APIs"],
-    icon: FaServer,
-    color: "#3B82F6",
-    gradient: "from-blue-600 to-cyan-600",
-    bgGradient: "from-blue-500/20 to-cyan-500/10",
-    status: "Completed"
+    technologies: ["JavaScript", "Tailwind CSS", "Laravel", "REST APIs", "React.JS", "Vite", "Typescript"],
+    mainlogo: "/gtech-logo.png",
+    color: "#17506E",
+    gradient: "from-[#E31335] to-[#17506E]",
+    bgGradient: "from-[#E31335] to-[#E31335]",
+    status: "Completed",
+    logo: "/gtech-logo.png",
   },
   {
     id: 3,
-    title: "Full Stack Developer",
-    project: "Warehouse Management System",
-    company: "G-Tech Solution",
-    duration: "June 2025 – Present",
+    title: "SpeedyMove",
+    project: "Removal and Moving Services",
+    company: "Completed under G-Tech Solution",
+    duration: "June 2025 - Present",
     description: [
-      "Leading frontend development with Next.js 14 and Tailwind CSS",
-      "Building real-time inventory tracking interfaces",
-      "Optimizing data flow and state management",
-      "Implementing modern UI/UX principles for enterprise applications"
+      "Full Removal Services - Provides residential, commercial, piano, heavy furniture, and interstate removal services across Sydney and beyond",
+      "Packing & Storage Solutions - Offers professional packing, unpacking, and secure short- or long-term storage options.",
+      "Flexible and Fast Moves - Specialises in fast, last-minute moves with experienced teams to make the relocation efficient and stress-free.",
+      "Customer-Focused Approach - Aims to deliver reliable, affordable service with a focus on safety and excellent customer care."
     ],
-    technologies: ["Next.js 14", "Tailwind CSS", "React", "TypeScript"],
-    icon: FaRocket,
-    color: "#10B981",
-    gradient: "from-green-600 to-emerald-600",
-    bgGradient: "from-green-500/20 to-emerald-500/10",
-    status: "Current"
+    technologies: ["Next.js 14", "Typescript", "Tailwind CSS", "Laravel", "REST APIs",],
+    mainlogo: "/gtech-logo.png",
+    color: "#01A7EF",
+    gradient: "from-[#01A7EF] to-[#01A7EF]/10",
+    bgGradient: "from-[#01A7EF] to-[#01A7EF]/10",
+    status: "Completed",
+    logo: "/speedymove-logo.png",
   },
+  {
+    id: 4,
+    title: "Workforce Management",
+    project: "SaaS Business Platform",
+    company: "Completed under G-Tech Solution",
+    duration: "June 2025 - Present",
+    description: [
+      "Workforce operations platform - Offers tools or services to help manage workforces and staffing in real time.",
+      "Construction and field focus - Likely includes solutions for construction or trade workforce coordination.",
+      "Staffing and resource tracking - Provides management features that help monitor and coordinate labour resources.",
+      "Business workforce support - Aims to support businesses by optimizing workforce deployment and productivity."
+    ],
+    technologies: ["JavaScript", "Tailwind CSS", "Laravel", "REST APIs", "Next.js 14",],
+    mainlogo: "/gtech-logo.png",
+    color: "#1A2D4D",
+    gradient: "from-[#1A2D4D] to-[#6FD943]",
+    bgGradient: "from-[#6FD943] to-[#1A2D4D]",
+    status: "Completed",
+    logo: "/wms-logo.png",
+  },
+  // ✅ Add more experiences here - scroll will automatically adjust!
 ];
 
 const getTechIcon = (tech: string) => {
@@ -81,9 +104,12 @@ const getTechIcon = (tech: string) => {
     "Tailwind CSS": SiTailwindcss,
     "JavaScript": SiJavascript,
     "TypeScript": SiTypescript,
+    "Typescript": SiTypescript,
     "React": SiReact,
+    "React.JS": SiReact,
     "MySQL": SiMysql,
     "Bootstrap": SiBootstrap,
+    "Vite": SiVite,
   };
   return iconMap[tech] || FaCode;
 };
@@ -92,32 +118,50 @@ const ExperienceSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // 🔥 Dynamic calculation based on experiences count
+  const experienceCount = experiences.length;
+  const scrollHeight = experienceCount * 100; // vh per experience
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  // Update active index based on scroll
+  // 🔥 Improved scroll tracking that works with any number of experiences
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (value) => {
-      const index = Math.min(
-        Math.floor(value * experiences.length),
-        experiences.length - 1
-      );
-      setActiveIndex(index);
+      // Calculate segment size for each experience
+      const segmentSize = 1 / experienceCount;
+
+      // Determine which experience should be active
+      let newIndex = Math.floor(value / segmentSize);
+
+      // Clamp to valid range
+      newIndex = Math.max(0, Math.min(newIndex, experienceCount - 1));
+
+      if (newIndex !== activeIndex) {
+        setActiveIndex(newIndex);
+      }
     });
+
     return () => unsubscribe();
-  }, [scrollYProgress]);
+  }, [scrollYProgress, activeIndex, experienceCount]);
 
   const activeExp = experiences[activeIndex];
-  const Icon = activeExp.icon;
+
+  // 🔥 Calculate progress within current experience section
+  const sectionProgress = useTransform(
+    scrollYProgress,
+    [activeIndex / experienceCount, (activeIndex + 1) / experienceCount],
+    [0, 1]
+  );
 
   return (
     <section
       id="experience"
       ref={containerRef}
       className="relative bg-gradient-to-br from-gray-900 via-black to-gray-950"
-      style={{ height: `${experiences.length * 100}vh` }}
+      style={{ height: `${scrollHeight}vh` }} // 🔥 Dynamic height
     >
       {/* Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -164,15 +208,25 @@ const ExperienceSection = () => {
             </h2>
           </div>
 
-          {/* Progress Indicator */}
-          <div className="flex justify-center gap-3 mb-8">
-            {experiences.map((_, index) => (
+          {/* 🔥 Dynamic Progress Indicator - works with any number of experiences */}
+          <div className="flex justify-center gap-3 mb-8 flex-wrap">
+            {experiences.map((exp, index) => (
               <motion.div
-                key={index}
-                className="relative"
+                key={exp.id}
+                className="relative cursor-pointer"
                 animate={{
                   scale: index === activeIndex ? 1.2 : 1,
                 }}
+                onClick={() => {
+                  // 🔥 Click to navigate to specific experience
+                  const targetScroll = (index / experienceCount) *
+                    (containerRef.current?.scrollHeight || 0);
+                  window.scrollTo({
+                    top: containerRef.current?.offsetTop! + targetScroll,
+                    behavior: 'smooth'
+                  });
+                }}
+                whileHover={{ scale: 1.3 }}
               >
                 <div
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${index === activeIndex
@@ -196,6 +250,13 @@ const ExperienceSection = () => {
                 )}
               </motion.div>
             ))}
+          </div>
+
+          {/* 🔥 Experience Counter */}
+          <div className="text-center mb-4">
+            <span className="text-gray-500 text-sm">
+              {activeIndex + 1} / {experienceCount}
+            </span>
           </div>
 
           {/* Single Card Container */}
@@ -266,11 +327,11 @@ const ExperienceSection = () => {
                       {/* Status & Number */}
                       <div className="flex flex-row lg:flex-col items-center gap-4">
                         {/* Card Number */}
-                        <div
-                          className={`rounded py-1 px-1 bg-white flex items-center justify-center shadow-xl`}
-                        >
-                          <img src={activeExp.logo} alt="" className="w-full max-w-25" />
-                        </div>
+                        {activeExp.logo && (
+                          <div className="rounded py-1 px-1 bg-white flex items-center justify-center shadow-xl">
+                            <img src={activeExp.logo} alt="" className="w-full max-w-25" />
+                          </div>
+                        )}
 
                         {/* Status Badge */}
                         <span className={`
@@ -348,10 +409,14 @@ const ExperienceSection = () => {
             </div>
           </div>
 
-          {/* Scroll Indicator */}
+          {/* 🔥 Scroll Indicator - Hide on last item */}
           <motion.div
             className="flex flex-col items-center mt-8 text-gray-500"
-            animate={{ opacity: activeIndex < experiences.length - 1 ? 1 : 0 }}
+            animate={{
+              opacity: activeIndex < experienceCount - 1 ? 1 : 0,
+              y: activeIndex < experienceCount - 1 ? 0 : 20
+            }}
+            transition={{ duration: 0.3 }}
           >
             <span className="text-sm mb-2">Scroll for more</span>
             <motion.div
@@ -361,22 +426,6 @@ const ExperienceSection = () => {
               <FaChevronDown className="w-5 h-5" />
             </motion.div>
           </motion.div>
-
-          {/* Stats Row */}
-          {/* <div className="grid grid-cols-3 gap-4 mt-8 max-w-2xl mx-auto">
-            {[
-              { value: activeIndex + 1, total: experiences.length, label: "Project" },
-              { value: "1+", label: "Year Exp" },
-              { value: "10+", label: "Technologies" },
-            ].map((stat, i) => (
-              <div key={i} className="text-center p-4 rounded-xl bg-gray-800/30 border border-gray-700/30">
-                <div className={`text-xl lg:text-2xl font-bold bg-gradient-to-r ${activeExp.gradient} bg-clip-text text-transparent`}>
-                  {stat.total ? `${stat.value}/${stat.total}` : stat.value}
-                </div>
-                <div className="text-gray-500 text-xs lg:text-sm">{stat.label}</div>
-              </div>
-            ))}
-          </div> */}
         </div>
       </div>
     </section>

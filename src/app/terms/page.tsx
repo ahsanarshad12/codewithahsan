@@ -35,7 +35,7 @@ const TermsAndConditions = () => {
             icon: <FaHandshake />,
             title: "1. Acceptance of Terms",
             content: [
-                "By accessing and using this website (ahsanarshad.com) or engaging my freelance services, you agree to be bound by these Terms and Conditions.",
+                "By accessing and using this website (codewithahsan.vercel.app) or engaging my freelance services, you agree to be bound by these Terms and Conditions.",
                 "If you do not agree with any part of these terms, please do not use this website or engage my services.",
                 "I reserve the right to modify these terms at any time. Continued use of the website after changes constitutes acceptance of the new terms.",
                 "These terms apply to all visitors, users, and clients who access or use my services."

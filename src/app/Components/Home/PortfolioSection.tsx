@@ -4,9 +4,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
-import { SiBootstrap, SiJavascript, SiHtml5, SiCss3 } from "react-icons/si";
+import { SiBootstrap, SiJavascript, SiHtml5, SiCss3, SiTypescript } from "react-icons/si";
 import { FaEye, FaCode } from "react-icons/fa";
-import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri";
+import { RiNextjsFill, RiReactjsLine, RiTailwindCssFill } from "react-icons/ri";
 import { TbBrandLaravel } from "react-icons/tb";
 
 const allProjects = [
@@ -48,7 +48,8 @@ const allProjects = [
     tech: [
       { icon: <RiNextjsFill className="w-4 h-4  " />, name: "Next.js 14", color: "text-white" },
       { icon: <RiTailwindCssFill className="w-4 h-4 " />, name: "Tailwind", color: "text-cyan-400" },
-      { icon: <TbBrandLaravel className="w-4 h-4 " />, name: "Laravel", color: "text-red-600" }
+      { icon: <TbBrandLaravel className="w-4 h-4 " />, name: "Laravel", color: "text-red-500" },
+      { icon: <SiJavascript className="w-4 h-4" />, name: "JavaScript", color: "text-yellow-400" },
     ],
     image: "/digitalbar-cover.png",
     demo: "https://digitalbar.com.au/",
@@ -56,49 +57,53 @@ const allProjects = [
   },
   {
     id: 4,
-    category: "Full Stack",
-    title: "AutoParts System",
-    description: "Laravel-based inventory management system with advanced filtering and reporting features.",
+    category: "B2B Partner Collaboration Portal",
+    title: "G-TechSol Partner",
+    description: "GTechSol Partner Portal is an online partner access site for G-Tech Solutions, an Australian IT and software development company.",
     tech: [
-      { icon: <div className="w-4 h-4 bg-red-500 rounded" />, name: "Laravel", color: "text-red-400" },
-      { icon: <div className="w-4 h-4 bg-blue-700 rounded" />, name: "MySQL", color: "text-blue-300" },
-      { icon: <SiBootstrap className="w-4 h-4" />, name: "Bootstrap", color: "text-purple-400" }
+      { icon: <RiReactjsLine className="w-4 h-4  " />, name: "React.Js", color: "text-cyan-500" },
+      { icon: <RiTailwindCssFill className="w-4 h-4 " />, name: "Tailwind", color: "text-cyan-400" },
+      { icon: <TbBrandLaravel className="w-4 h-4 " />, name: "Laravel", color: "text-red-500" },
+      { icon: <SiJavascript className="w-4 h-4" />, name: "JavaScript", color: "text-yellow-400" },
     ],
-    image: "",
-    demo: "#",
-    featured: false
+    image: "/gtech-partner-cover.png",
+    demo: "https://partner.gtechsol.com.au/",
+    featured: true
   },
   {
     id: 5,
-    category: "Full Stack",
-    title: "SaaS Platform",
-    description: "Business automation platform with modular architecture and multi-tenant support.",
+    category: "Removals & Storage",
+    title: "SpeedyMove ",
+    description: "A Sydney-based removals and storage company offering professional home, office, interstate, and specialised moving services",
     tech: [
-      { icon: <div className="w-4 h-4 bg-red-500 rounded" />, name: "Laravel", color: "text-red-400" },
-      { icon: <SiJavascript className="w-4 h-4" />, name: "JavaScript", color: "text-yellow-400" },
-      { icon: <SiBootstrap className="w-4 h-4" />, name: "Bootstrap", color: "text-purple-400" }
+      { icon: <RiNextjsFill className="w-4 h-4  " />, name: "Next.js 14", color: "text-white" },
+      { icon: <RiTailwindCssFill className="w-4 h-4 " />, name: "Tailwind", color: "text-cyan-400" },
+      { icon: <TbBrandLaravel className="w-4 h-4 " />, name: "Laravel", color: "text-red-500" },
+      { icon: <SiTypescript className="w-4 h-4" />, name: "TypeScript", color: "text-blue-500" },
+
     ],
-    image: "",
-    demo: "#",
+    image: "/speedymove-cover.png",
+    demo: "https://speedymove.com.au/",
     featured: false
   },
   {
     id: 6,
-    category: "Frontend",
-    title: "Portfolio Website",
-    description: "Modern portfolio design with interactive elements, animations, and responsive layout.",
+    category: "Full Stack",
+    title: "Workforce Management",
+    description: "A workforce management and labour solutions platform focused on real-time staffing and operational support.",
     tech: [
-      { icon: <div className="w-4 h-4 bg-black rounded" />, name: "Next.js", color: "text-white" },
-      { icon: <div className="w-4 h-4 bg-cyan-500 rounded" />, name: "Tailwind", color: "text-cyan-400" },
-      { icon: <SiJavascript className="w-4 h-4" />, name: "TypeScript", color: "text-blue-500" }
+      { icon: <RiNextjsFill className="w-4 h-4  " />, name: "Next.js 14", color: "text-white" },
+      { icon: <RiTailwindCssFill className="w-4 h-4 " />, name: "Tailwind", color: "text-cyan-400" },
+      { icon: <TbBrandLaravel className="w-4 h-4 " />, name: "Laravel", color: "text-red-500" },
+      { icon: <SiJavascript className="w-4 h-4" />, name: "JavaScript", color: "text-yellow-400" },
     ],
-    image: "",
-    demo: "#",
+    image: "/wms-cover.png",
+    demo: "https://workforcems.com.au/",
     featured: false
   },
 ];
 
-const categories = ["All", "E-Commerce", "Full Stack", "Frontend"];
+const categories = ["All", "E-Commerce", "Full Stack", "Frontend", "B2B Partner Collaboration Portal", "Removals & Storage"];
 
 const PortfolioSection = () => {
   const [activeCategory, setActiveCategory] = useState("All");
