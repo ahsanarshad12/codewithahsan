@@ -1,8 +1,9 @@
 import { FaGithub, FaLinkedinIn, FaTwitter, FaEnvelope, } from 'react-icons/fa';
-import { SiNextdotjs, SiJavascript, SiTailwindcss, SiLaravel } from 'react-icons/si';
+import { SiNextdotjs, SiJavascript, SiTailwindcss, SiLaravel, SiTypescript } from 'react-icons/si';
 import { CiSaveDown1 } from "react-icons/ci";
 
 import Image from "next/image";
+import { RiReactjsLine } from 'react-icons/ri';
 
 const HeroSection = () => {
     const socialLinks = [
@@ -14,8 +15,10 @@ const HeroSection = () => {
 
     const techStack = [
         { icon: SiNextdotjs, name: "Next.js", color: "text-white" },
+        { icon: RiReactjsLine, name: "React", color: "text-blue-400" },
         { icon: SiTailwindcss, name: "Tailwind", color: "text-teal-400" },
-        { icon: SiJavascript, name: "Javascript", color: "text-yellow-300" },
+        { icon: SiTypescript, name: "TypeScript", color: "text-blue-400" },
+        { icon: SiJavascript, name: "JavaScript", color: "text-yellow-300" },
         { icon: SiLaravel, name: "Laravel", color: "text-red-500" },
     ];
 
