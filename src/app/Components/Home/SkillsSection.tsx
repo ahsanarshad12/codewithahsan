@@ -20,7 +20,7 @@ const skills = [
     title: "Next.js 14",
     level: "Advanced",
     desc: "App Router, Server Actions, Static & Dynamic Rendering",
-    color: "text-black dark:text-white",
+    color: "text-white dark:text-white",
     gradient: "from-gray-800 to-black",
     border: "border-gray-700"
   },
