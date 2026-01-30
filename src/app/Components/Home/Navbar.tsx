@@ -96,7 +96,7 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -100 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${scrolled ? 'w-full max-w-[95%]' : 'w-11/12 max-w-6xl'}`}
+                className={`fixed top-4 curpo left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${scrolled ? 'w-full max-w-[95%]' : 'w-11/12 max-w-6xl'}`}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
             >
@@ -128,13 +128,13 @@ const Navbar = () => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => scrollToSection('home')}
-                                className="group flex items-center gap-3 px-4  rounded-xl bg-white/20 transition-all duration-300"
+                                className="group flex cursor-pointer items-center gap-3 px-4  rounded-xl bg-white/20 transition-all duration-300"
                             >
                                 <img src="/logo.png" alt="" className='w-full max-w-20' />
                             </motion.button>
 
                             {/* Desktop Navigation */}
-                            <div className="hidden md:flex items-center gap-1">
+                            <div className="hidden md:flex  items-center gap-1">
                                 {navItems.map((item, index) => (
                                     <motion.button
                                         key={item.id}
@@ -153,7 +153,7 @@ const Navbar = () => {
                                         {/* Background gradient on active */}
                                         {activeSection === item.id && (
                                             <motion.div
-                                                className={`absolute inset-0 rounded-xl bg-gradient-to-r ${item.color} opacity-20`}
+                                                className={`absolute  inset-0 rounded-xl bg-gradient-to-r ${item.color} opacity-20`}
                                                 layoutId="activeBackground"
                                                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                             />
@@ -167,7 +167,7 @@ const Navbar = () => {
                                             <div className={`absolute inset-0 rounded-xl border border-transparent border-gradient-to-r ${item.color} opacity-30`} />
                                         )}
 
-                                        <div className="relative flex items-center gap-3">
+                                        <div className="relative cursor-pointer flex items-center gap-3">
                                             <span className={`text-lg transition-transform duration-300 ${activeSection === item.id ? 'scale-110' : 'group-hover:scale-110'}`}>
                                                 {item.icon}
                                             </span>
@@ -192,7 +192,7 @@ const Navbar = () => {
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => scrollToSection('hire')}
-                                    className="ml-4 px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium text-sm shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 flex items-center gap-2"
+                                    className="ml-4 px-6 py-2.5 cursor-pointer rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium text-sm shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 flex items-center gap-2"
                                 >
                                     <FaEnvelope className="w-4 h-4" />
                                     <span>Hire Me</span>

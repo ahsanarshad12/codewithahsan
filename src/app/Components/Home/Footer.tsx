@@ -139,7 +139,7 @@ const Footer = () => {
           {/* Brand */}
           <div data-aos="fade-up">
             <div className="flex items-center gap-4 mb-6">
-              <img src="/logo.png" alt="" className='w-full max-w-20 bg-white rounded p-2 shadow-2xl ' />
+              <img src="/logo.png" alt="" className='w-full  max-w-20 bg-white rounded p-2 shadow-2xl ' />
             </div>
             <p className="text-gray-400 mb-6 max-w-lg leading-relaxed">
               Full-stack developer crafting exceptional digital experiences with modern web technologies.

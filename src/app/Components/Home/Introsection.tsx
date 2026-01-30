@@ -102,14 +102,15 @@ const HeroSection = () => {
 
                         {/* CTA Buttons */}
                         <div className="flex flex-wrap gap-4 pt-4">
-                            <a
-                                href="#projects"
-                                className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl font-semibold text-white shadow-2xl shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105"
+                            {/* <button
+
+                                id='portfolio'
+                                className=" cursor-pointer relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl font-semibold text-white shadow-2xl shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105"
                             >
                                 <span>View My Work</span>
                                 <CiSaveDown1 className="w-6 h-6 group-hover:rotate-12 transition-transform" />
                                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
-                            </a>
+                            </button> */}
 
                             <a
                                 href="mailto:ahsanarshad291@gmail.com"
