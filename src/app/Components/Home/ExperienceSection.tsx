@@ -160,7 +160,7 @@ const ExperienceSection = () => {
     <section
       id="experience"
       ref={containerRef}
-      className="relative bg-gradient-to-br from-gray-900 via-black to-gray-950"
+      className="relative bg-gradient-to-br from-gray-900 via-black to-gray-950 py-20"
       style={{ height: `${scrollHeight}vh` }} // 🔥 Dynamic height
     >
       {/* Background */}
@@ -185,11 +185,11 @@ const ExperienceSection = () => {
       </div>
 
       {/* Sticky Container */}
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+      <div className="sticky top-0 h-screen flex flex-col justify-center ">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Header */}
-          <div className="text-center mb-8 lg:mb-12">
+          <div className="text-center mb-8 lg:mb-02">
             <div className="inline-flex items-center gap-3 mb-4">
               <div className="w-12 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent" />
               <span className="text-sm uppercase tracking-widest text-purple-400 font-medium">
