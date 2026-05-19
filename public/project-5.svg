@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260" viewBox="0 0 400 260">
+  <rect width="400" height="260" fill="#fef2f2"/>
+  <rect x="0" y="0" width="400" height="50" fill="#fff"/>
+  <rect x="20" y="12" width="90" height="26" rx="6" fill="#EF4444" opacity="0.8"/>
+  <rect x="280" y="18" width="40" height="14" rx="7" fill="#1a1a1a" opacity="0.08"/>
+  <rect x="330" y="18" width="40" height="14" rx="7" fill="#1a1a1a" opacity="0.08"/>
+  <rect x="20" y="65" width="360" height="30" rx="8" fill="#fff"/>
+  <rect x="35" y="73" width="200" height="14" rx="7" fill="#1a1a1a" opacity="0.06"/>
+  <rect x="310" y="73" width="50" height="14" rx="7" fill="#EF4444" opacity="0.3"/>
+  <rect x="20" y="110" width="110" height="120" rx="10" fill="#fff"/>
+  <rect x="30" y="120" width="90" height="70" rx="6" fill="#EF4444" opacity="0.15"/>
+  <rect x="30" y="200" width="70" height="8" rx="2" fill="#1a1a1a" opacity="0.4"/>
+  <rect x="30" y="215" width="40" height="8" rx="2" fill="#EF4444" opacity="0.5"/>
+  <rect x="145" y="110" width="110" height="120" rx="10" fill="#fff"/>
+  <rect x="155" y="120" width="90" height="70" rx="6" fill="#EF4444" opacity="0.12"/>
+  <rect x="155" y="200" width="70" height="8" rx="2" fill="#1a1a1a" opacity="0.4"/>
+  <rect x="155" y="215" width="40" height="8" rx="2" fill="#EF4444" opacity="0.5"/>
+  <rect x="270" y="110" width="110" height="120" rx="10" fill="#fff"/>
+  <rect x="280" y="120" width="90" height="70" rx="6" fill="#EF4444" opacity="0.1"/>
+  <rect x="280" y="200" width="70" height="8" rx="2" fill="#1a1a1a" opacity="0.4"/>
+  <rect x="280" y="215" width="40" height="8" rx="2" fill="#EF4444" opacity="0.5"/>
+  <text x="200" y="255" font-family="sans-serif" font-size="10" fill="#1a1a1a" opacity="0.3" text-anchor="middle">Butcher Meat Shop</text>
+</svg>

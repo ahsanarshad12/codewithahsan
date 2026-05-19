@@ -1,17 +1,68 @@
 'use client'
 
-import { useState } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
+import { motion, useInView, useSpring, useMotionValue } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
+import Image from 'next/image'
 
 const projects = [
-  { num: '01', title: 'DigitalBar Website', category: 'Business Website', color: '#2563EB' },
-  { num: '02', title: 'G-Tech Partner Portal', category: 'Dashboard / Portal', color: '#10B981' },
-  { num: '03', title: 'SpeedyMove Platform', category: 'Logistics / UI', color: '#F59E0B' },
-  { num: '04', title: 'Workforce Management', category: 'Admin Panel', color: '#8B5CF6' },
-  { num: '05', title: 'Butcher Meat Shop', category: 'E-Commerce', color: '#EF4444' },
+  { num: '01', title: 'DigitalBar Website', category: 'Business Website', color: '#2563EB', image: '/project-1.svg' },
+  { num: '02', title: 'G-Tech Partner Portal', category: 'Dashboard / Portal', color: '#10B981', image: '/project-2.svg' },
+  { num: '03', title: 'SpeedyMove Platform', category: 'Logistics / UI', color: '#F59E0B', image: '/project-3.svg' },
+  { num: '04', title: 'Workforce Management', category: 'Admin Panel', color: '#8B5CF6', image: '/project-4.svg' },
+  { num: '05', title: 'Butcher Meat Shop', category: 'E-Commerce', color: '#EF4444', image: '/project-5.svg' },
 ]
+
+function CursorImage({ hoveredIndex }: { hoveredIndex: number | null }) {
+  const cursorX = useMotionValue(-200)
+  const cursorY = useMotionValue(-200)
+
+  const springX = useSpring(cursorX, { stiffness: 200, damping: 20, mass: 0.5 })
+  const springY = useSpring(cursorY, { stiffness: 200, damping: 20, mass: 0.5 })
+
+  useEffect(() => {
+    const moveCursor = (e: MouseEvent) => {
+      cursorX.set(e.clientX + 20)
+      cursorY.set(e.clientY - 80)
+    }
+    window.addEventListener('mousemove', moveCursor)
+    return () => window.removeEventListener('mousemove', moveCursor)
+  }, [cursorX, cursorY])
+
+  if (hoveredIndex === null) return null
+
+  const project = projects[hoveredIndex]
+
+  return (
+    <motion.div
+      className="fixed top-0 left-0 z-[9999] pointer-events-none hidden md:block"
+      style={{ x: springX, y: springY }}
+      initial={{ opacity: 0, scale: 0.6 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.6 }}
+      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="relative w-[200px] h-[130px] rounded-xl overflow-hidden shadow-2xl ring-1 ring-black/10">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-cover"
+          sizes="200px"
+        />
+        {/* Color overlay at bottom */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-8 flex items-center px-3"
+          style={{ backgroundColor: project.color }}
+        >
+          <span className="text-white text-xs font-display font-semibold truncate">
+            {project.title}
+          </span>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
 
 function ProjectRow({
   project,
@@ -75,25 +126,6 @@ function ProjectRow({
         </div>
 
         <div className="flex items-center gap-4">
-          {/* Thumbnail reveal */}
-          <motion.div
-            initial={{ width: 0, opacity: 0 }}
-            animate={
-              isHovered
-                ? { width: 120, opacity: 1 }
-                : { width: 0, opacity: 0 }
-            }
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden md:block h-16 rounded-md overflow-hidden"
-          >
-            <div
-              className="w-full h-full flex items-center justify-center text-white font-display font-bold text-lg"
-              style={{ backgroundColor: project.color }}
-            >
-              {project.num}
-            </div>
-          </motion.div>
-
           <ArrowUpRight
             className={`size-5 transition-transform duration-300 ${
               isHovered ? 'rotate-45 text-accent' : 'rotate-0'
@@ -112,6 +144,9 @@ export default function SelectedProjects() {
 
   return (
     <section id="projects" className="py-24 md:py-32">
+      {/* Cursor-following image */}
+      <CursorImage hoveredIndex={hoveredIndex} />
+
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <motion.div

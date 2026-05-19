@@ -1,17 +1,17 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Menu } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, ArrowUpRight } from 'lucide-react'
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 
 const navLinks = [
-  { href: '#home', label: 'Home' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#process', label: 'Process' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#home', label: 'Home', num: '01' },
+  { href: '#projects', label: 'Projects', num: '02' },
+  { href: '#skills', label: 'Skills', num: '03' },
+  { href: '#process', label: 'Process', num: '04' },
+  { href: '#contact', label: 'Contact', num: '05' },
 ]
 
 function NavLink({ href, label }: { href: string; label: string }) {
@@ -69,20 +69,7 @@ export default function Navbar() {
             className="inline-flex items-center gap-2 bg-accent text-cream px-5 py-2 rounded-full text-sm font-medium hover:bg-accent/90 transition-colors"
           >
             Hire Me
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M5 12h14" />
-              <path d="m12 5 7 7-7 7" />
-            </svg>
+            <ArrowUpRight className="size-3.5" />
           </a>
         </div>
 
@@ -90,32 +77,86 @@ export default function Navbar() {
         <div className="md:hidden">
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Open menu">
+              <Button variant="ghost" size="icon" aria-label="Open menu" className="hover:bg-ink/5">
                 <Menu className="size-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-cream">
-              <SheetTitle className="font-display text-lg font-bold text-ink">
-                Navigation
-              </SheetTitle>
-              <div className="flex flex-col gap-6 mt-8">
-                {navLinks.map((link) => (
-                  <a
+            <SheetContent
+              side="right"
+              className="bg-ink text-cream border-l-0 w-[85vw] sm:max-w-[380px] p-0"
+            >
+              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+
+              {/* Close button — custom styled */}
+              <div className="flex items-center justify-between p-6 border-b border-cream/10">
+                <a href="#home" className="font-display text-xl font-bold text-cream tracking-tight" onClick={() => setMobileOpen(false)}>
+                  AHSAN<span className="text-accent">.</span>
+                </a>
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="size-10 rounded-full border border-cream/20 flex items-center justify-center hover:bg-cream/10 transition-colors"
+                  aria-label="Close menu"
+                >
+                  <X className="size-4" />
+                </button>
+              </div>
+
+              {/* Nav Links — large Spector-style */}
+              <div className="flex flex-col p-6 gap-0">
+                {navLinks.map((link, i) => (
+                  <motion.a
                     key={link.href}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="font-display text-2xl font-semibold text-ink hover:text-accent transition-colors"
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + i * 0.06, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="group flex items-center gap-4 py-5 border-b border-cream/10 hover:pl-2 transition-all duration-300"
                   >
-                    {link.label}
-                  </a>
+                    <span className="text-xs font-body text-cream/30 tabular-nums">{link.num}</span>
+                    <span className="font-display text-2xl font-semibold text-cream group-hover:text-accent transition-colors duration-300">
+                      {link.label}
+                    </span>
+                  </motion.a>
                 ))}
+              </div>
+
+              {/* Bottom section */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-cream/10">
+                {/* Hire Me button */}
                 <a
                   href="#contact"
                   onClick={() => setMobileOpen(false)}
-                  className="inline-flex items-center justify-center gap-2 bg-accent text-cream px-6 py-3 rounded-full text-sm font-medium hover:bg-accent/90 transition-colors mt-4"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-accent text-cream px-6 py-3.5 rounded-full text-sm font-medium hover:bg-accent/90 transition-colors mb-6"
                 >
-                  Hire Me →
+                  Hire Me
+                  <ArrowUpRight className="size-4" />
                 </a>
+
+                {/* Social row */}
+                <div className="flex items-center justify-between">
+                  <span className="font-body text-xs text-cream/40">
+                    Rahim Yar Khan, PK
+                  </span>
+                  <div className="flex items-center gap-4">
+                    <a
+                      href="https://linkedin.com/in/codewithahsan"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-body text-xs text-cream/40 hover:text-accent transition-colors"
+                    >
+                      LinkedIn
+                    </a>
+                    <a
+                      href="https://github.com/codewithahsan"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-body text-xs text-cream/40 hover:text-accent transition-colors"
+                    >
+                      GitHub
+                    </a>
+                  </div>
+                </div>
               </div>
             </SheetContent>
           </Sheet>
