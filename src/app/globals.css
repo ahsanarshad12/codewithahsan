@@ -1,0 +1,64 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-cream: #F5F2EE;
+  --color-ink: #1A1A1A;
+  --color-muted: #6B6B6B;
+  --color-accent: #2563EB;
+  --color-background: #F5F2EE;
+  --color-foreground: #1A1A1A;
+  --font-display: var(--font-syne);
+  --font-body: var(--font-dm-sans);
+  --font-sans: var(--font-dm-sans);
+  /* shadcn compatibility */
+  --color-card: #FFFFFF;
+  --color-card-foreground: #1A1A1A;
+  --color-primary: #1A1A1A;
+  --color-primary-foreground: #F5F2EE;
+  --color-secondary: #F5F2EE;
+  --color-secondary-foreground: #1A1A1A;
+  --color-muted-foreground: #6B6B6B;
+  --color-border: oklch(0.922 0 0);
+  --color-ring: #2563EB;
+  --color-input: oklch(0.922 0 0);
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #1A1A1A;
+  --color-destructive: oklch(0.577 0.245 27.325);
+  --color-accent-foreground: #1A1A1A;
+  --radius-lg: 0.625rem;
+  --radius-md: calc(0.625rem - 2px);
+  --radius-sm: calc(0.625rem - 4px);
+  --radius-xl: calc(0.625rem + 4px);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #F5F2EE;
+  color: #1A1A1A;
+  font-family: var(--font-dm-sans), sans-serif;
+}
+
+::selection {
+  background-color: #2563EB;
+  color: #F5F2EE;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+}
