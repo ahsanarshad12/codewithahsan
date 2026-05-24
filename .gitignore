@@ -1,7 +1,11 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+<<<<<<< HEAD
 node_modules
+=======
+/node_modules
+>>>>>>> dc18b16f4851121c1b69831c6a1ea34a9010fdc4
 /.pnp
 .pnp.*
 .yarn/*
@@ -36,6 +40,7 @@ yarn-error.log*
 # vercel
 .vercel
 
+<<<<<<< HEAD
 
 # typescript
 *.tsbuildinfo
@@ -52,3 +57,8 @@ prompt
 server.log
 # Skills directory
 /skills/
+=======
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+>>>>>>> dc18b16f4851121c1b69831c6a1ea34a9010fdc4
