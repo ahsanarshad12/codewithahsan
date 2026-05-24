@@ -13,7 +13,6 @@
   --font-display: var(--font-syne);
   --font-body: var(--font-dm-sans);
   --font-sans: var(--font-dm-sans);
-  /* shadcn compatibility */
   --color-card: #FFFFFF;
   --color-card-foreground: #1A1A1A;
   --color-primary: #1A1A1A;

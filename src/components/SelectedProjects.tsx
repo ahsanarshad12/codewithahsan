@@ -1,22 +1,65 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, useInView, useSpring, useMotionValue } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Github, LayoutGrid, List } from 'lucide-react'
 import Image from 'next/image'
 
 const projects = [
-  { num: '01', title: 'DigitalBar Website', category: 'Business Website', color: '#2563EB', image: '/project-1.svg' },
-  { num: '02', title: 'G-Tech Partner Portal', category: 'Dashboard / Portal', color: '#10B981', image: '/project-2.svg' },
-  { num: '03', title: 'SpeedyMove Platform', category: 'Logistics / UI', color: '#F59E0B', image: '/project-3.svg' },
-  { num: '04', title: 'Workforce Management', category: 'Admin Panel', color: '#8B5CF6', image: '/project-4.svg' },
-  { num: '05', title: 'Butcher Meat Shop', category: 'E-Commerce', color: '#EF4444', image: '/project-5.svg' },
+  {
+    num: '01',
+    title: 'DigitalBar Website',
+    category: 'Business Website',
+    color: '#EF4444',
+    image: '/project-1.png',
+    tech: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
+    live: 'https://digitalbar.com.au/',
+  },
+  {
+    num: '02',
+    title: 'G-Tech Partner',
+    category: 'SaaS Partner',
+    color: '#10B981',
+    image: '/project-2.png',
+    tech: ['Next.js', 'Laravel', 'MySQL'],
+    live: 'https://partner.gtechsol.com.au/',
+
+  },
+  {
+    num: '03',
+    title: 'SpeedyMove Platform',
+    category: 'Removalists / UI',
+    color: '#F59E0B',
+    image: '/project-3.png',
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    live: 'https://speedymove.com.au/',
+
+  },
+  {
+    num: '04',
+    title: 'Portfolio Template',
+    category: 'Personal Project',
+    color: '#8B5CF6',
+    image: '/project-4.png',
+    tech: ['React', 'Node.js', 'PostgreSQL'],
+    live: 'https://buildwithahsan-liard.vercel.app/',
+    
+  },
+  {
+    num: '05',
+    title: 'GSaaS',
+    category: 'SaaS Platform',
+    color: '#EF4444',
+    image: '/project-5.png',
+    tech: ['HTML', 'Bootstrap', 'JavaScript'],
+    live: 'https://gsaas.com.au/',
+   
+  },
 ]
 
 function CursorImage({ hoveredIndex }: { hoveredIndex: number | null }) {
   const cursorX = useMotionValue(-200)
   const cursorY = useMotionValue(-200)
-
   const springX = useSpring(cursorX, { stiffness: 200, damping: 20, mass: 0.5 })
   const springY = useSpring(cursorY, { stiffness: 200, damping: 20, mass: 0.5 })
 
@@ -30,7 +73,6 @@ function CursorImage({ hoveredIndex }: { hoveredIndex: number | null }) {
   }, [cursorX, cursorY])
 
   if (hoveredIndex === null) return null
-
   const project = projects[hoveredIndex]
 
   return (
@@ -43,23 +85,83 @@ function CursorImage({ hoveredIndex }: { hoveredIndex: number | null }) {
       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="relative w-[200px] h-[130px] rounded-xl overflow-hidden shadow-2xl ring-1 ring-black/10">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          className="object-cover"
-          sizes="200px"
-        />
-        {/* Color overlay at bottom */}
+        <Image src={project.image} alt={project.title} fill className="object-cover" sizes="200px" />
         <div
           className="absolute bottom-0 left-0 right-0 h-8 flex items-center px-3"
           style={{ backgroundColor: project.color }}
         >
-          <span className="text-white text-xs font-display font-semibold truncate">
-            {project.title}
-          </span>
+          <span className="text-white text-xs font-display font-semibold truncate">{project.title}</span>
         </div>
       </div>
+    </motion.div>
+  )
+}
+
+function ProjectCard({ project, index }: { project: (typeof projects)[0]; index: number }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-50px' })
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <a
+        href={project.live}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group block bg-white rounded-2xl overflow-hidden border border-border hover:shadow-xl transition-shadow duration-300"
+      >
+        {/* Screenshot */}
+        <div className="relative h-48 overflow-hidden" style={{ backgroundColor: project.color + '18' }}>
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+          <div
+            className="absolute top-3 left-3 text-xs font-body font-semibold text-white px-2 py-1 rounded-full"
+            style={{ backgroundColor: project.color }}
+          >
+            {project.category}
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-5">
+          <div className="flex items-start justify-between gap-2 mb-3">
+            <h3 className="font-display font-bold text-ink text-lg leading-tight">{project.title}</h3>
+            <span className="text-xs text-muted font-body shrink-0">{project.num}</span>
+          </div>
+
+          {/* Tech tags */}
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {project.tech.map((t) => (
+              <span
+                key={t}
+                className="text-xs font-body border border-border text-muted px-2 py-0.5 rounded-full"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+
+          {/* Links */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={(e) => { e.preventDefault(); window.open(project.live, '_blank', 'noopener,noreferrer') }}
+              className="inline-flex items-center gap-1 text-xs font-body font-semibold text-accent"
+            >
+              Live <ArrowUpRight className="size-3" />
+            </button>
+           
+          </div>
+        </div>
+      </a>
     </motion.div>
   )
 }
@@ -85,68 +187,62 @@ function ProjectRow({
       ref={ref}
       initial={{ opacity: 0, y: 60 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{
-        duration: 0.6,
-        delay: index * 0.1,
-        ease: [0.16, 1, 0.3, 1],
-      }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
-      className="relative group cursor-pointer border-b border-border last:border-b-0"
+      className="relative group border-b border-border last:border-b-0"
     >
-      <div
-        className={`flex items-center justify-between py-6 md:py-8 px-2 md:px-4 transition-all duration-500 ${
-          isHovered ? 'bg-ink text-cream' : 'bg-transparent text-ink'
-        }`}
+      <a
+        href={project.live}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`flex items-center justify-between py-6 md:py-8 px-2 md:px-4 transition-all duration-500 ${isHovered ? 'bg-ink text-cream' : 'bg-transparent text-ink'
+          }`}
       >
         <div className="flex items-center gap-4 md:gap-8">
-          <span
-            className={`font-body text-sm transition-colors duration-500 ${
-              isHovered ? 'text-cream/50' : 'text-muted'
-            }`}
-          >
+          <span className={`font-body text-sm transition-colors duration-500 ${isHovered ? 'text-cream/50' : 'text-muted'}`}>
             {project.num}
           </span>
           <div>
-            <h3
-              className={`font-display text-xl md:text-3xl font-bold transition-colors duration-500 ${
-                isHovered ? 'text-cream' : 'text-ink'
-              }`}
-            >
+            <h3 className={`font-display text-xl md:text-3xl font-bold transition-colors duration-500 ${isHovered ? 'text-cream' : 'text-ink'}`}>
               {project.title}
             </h3>
-            <p
-              className={`font-body text-sm mt-1 transition-colors duration-500 ${
-                isHovered ? 'text-cream/60' : 'text-muted'
-              }`}
-            >
+            <p className={`font-body text-sm mt-1 transition-colors duration-500 ${isHovered ? 'text-cream/60' : 'text-muted'}`}>
               {project.category}
             </p>
           </div>
         </div>
-
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <div className="hidden md:flex gap-1.5">
+            {project.tech.map((t) => (
+              <span
+                key={t}
+                className={`text-xs font-body border px-2 py-0.5 rounded-full transition-colors duration-500 ${isHovered ? 'border-cream/20 text-cream/60' : 'border-border text-muted'
+                  }`}
+              >
+                {t}
+              </span>
+            ))}
+          </div>
           <ArrowUpRight
-            className={`size-5 transition-transform duration-300 ${
-              isHovered ? 'rotate-45 text-accent' : 'rotate-0'
-            }`}
+            className={`size-5 transition-transform duration-300 ${isHovered ? 'rotate-45 text-accent' : 'rotate-0'}`}
           />
         </div>
-      </div>
+      </a>
     </motion.div>
   )
 }
 
 export default function SelectedProjects() {
+  const [view, setView] = useState<'grid' | 'list'>('grid')
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+
   const headerRef = useRef(null)
   const headerInView = useInView(headerRef, { once: true, margin: '-100px' })
 
   return (
     <section id="projects" className="py-24 md:py-32">
-      {/* Cursor-following image */}
-      <CursorImage hoveredIndex={hoveredIndex} />
-
+      {view === 'list' && <CursorImage hoveredIndex={hoveredIndex} />}
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <motion.div
@@ -160,7 +256,8 @@ export default function SelectedProjects() {
             <span className="text-xs tracking-[0.3em] text-muted font-body uppercase mb-4 block">
               Portfolio
             </span>
-            <h2 className="font-display font-bold text-ink leading-[0.95]"
+            <h2
+              className="font-display font-bold text-ink leading-[0.95]"
               style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)' }}
             >
               SELECTED
@@ -168,28 +265,50 @@ export default function SelectedProjects() {
               PROJECTS
             </h2>
           </div>
-          <a
-            href="#projects"
-            className="hidden md:inline-flex items-center gap-2 text-sm font-body text-muted hover:text-accent transition-colors"
-          >
-            View All
-            <ArrowUpRight className="size-4" />
-          </a>
+
+          {/* View toggle */}
+          <div className="flex items-center gap-1 border border-border rounded-full p-1">
+            <button
+              onClick={() => setView('grid')}
+              className={`p-2 rounded-full transition-colors ${view === 'grid' ? 'bg-ink text-cream' : 'text-muted hover:text-ink'}`}
+              aria-label="Grid view"
+            >
+              <LayoutGrid className="size-4" />
+            </button>
+            <button
+              onClick={() => setView('list')}
+              className={`p-2 rounded-full transition-colors ${view === 'list' ? 'bg-ink text-cream' : 'text-muted hover:text-ink'}`}
+              aria-label="List view"
+            >
+              <List className="size-4" />
+            </button>
+          </div>
         </motion.div>
 
-        {/* Project List */}
-        <div className="border-t border-border">
-          {projects.map((project, index) => (
-            <ProjectRow
-              key={project.num}
-              project={project}
-              index={index}
-              isHovered={hoveredIndex === index}
-              onHoverStart={() => setHoveredIndex(index)}
-              onHoverEnd={() => setHoveredIndex(null)}
-            />
-          ))}
-        </div>
+        {/* Grid View */}
+        {view === 'grid' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project, index) => (
+              <ProjectCard key={project.num} project={project} index={index} />
+            ))}
+          </div>
+        )}
+
+        {/* List View */}
+        {view === 'list' && (
+          <div className="border-t border-border">
+            {projects.map((project, index) => (
+              <ProjectRow
+                key={project.num}
+                project={project}
+                index={index}
+                isHovered={hoveredIndex === index}
+                onHoverStart={() => setHoveredIndex(index)}
+                onHoverEnd={() => setHoveredIndex(null)}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )

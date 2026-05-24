@@ -5,7 +5,11 @@ import SelectedProjects from '@/components/SelectedProjects'
 import Skills from '@/components/Skills'
 import StatsCounter from '@/components/StatsCounter'
 import WorkProcess from '@/components/WorkProcess'
-import ContactCTA from '@/components/ContactCTA'
+import Testimonials from '@/components/Testimonials'
+import AboutStory from '@/components/AboutStory'
+import Services from '@/components/Services'
+import TechStack from '@/components/TechStack'
+import ContactForm from '@/components/ContactForm'
 import Footer from '@/components/Footer'
 
 export default function Home() {
@@ -17,9 +21,13 @@ export default function Home() {
       <SelectedProjects />
       <MarqueeText dark={false} />
       <Skills />
+      <AboutStory />
+      <Services />
+      <TechStack />
+      <Testimonials />
       <StatsCounter />
       <WorkProcess />
-      <ContactCTA />
+      <ContactForm />
       <Footer />
     </main>
   )

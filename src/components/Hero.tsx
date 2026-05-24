@@ -1,9 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, ArrowUpRight } from 'lucide-react'
 
 const tags = ['React.js', 'Next.js', 'Tailwind CSS', 'Laravel', 'UI Dev', '2025']
+
+const EASE = [0.16, 1, 0.3, 1] as const
 
 const wordVariants = {
   hidden: { y: 120, opacity: 0 },
@@ -13,7 +15,7 @@ const wordVariants = {
     transition: {
       duration: 0.8,
       delay: i * 0.08,
-      ease: [0.16, 1, 0.3, 1],
+      ease: EASE,
     },
   }),
 }
@@ -23,7 +25,7 @@ const fadeUp = {
   visible: (delay: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.6, delay, ease: EASE },
   }),
 }
 
@@ -35,7 +37,7 @@ const chipVariants = {
     transition: {
       duration: 0.4,
       delay: 1.4 + i * 0.08,
-      ease: [0.16, 1, 0.3, 1],
+      ease: EASE,
     },
   }),
 }
@@ -124,6 +126,28 @@ export default function Hero() {
         >
           Rahim Yar Khan, Pakistan · Available for Freelance · 2025–Present
         </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          custom={1.0}
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          className="flex flex-wrap items-center gap-3 mb-10"
+        >
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 bg-ink text-cream font-body font-semibold text-sm px-6 py-3 rounded-full hover:bg-accent transition-colors duration-300"
+          >
+            Hire Me <ArrowUpRight className="size-4" />
+          </a>
+          <a
+            href="#projects"
+            className="inline-flex items-center gap-2 border border-border text-ink font-body text-sm px-6 py-3 rounded-full hover:border-ink transition-colors duration-300"
+          >
+            View Work
+          </a>
+        </motion.div>
 
         {/* Tags row */}
         <div className="flex flex-wrap gap-2 mb-12">
