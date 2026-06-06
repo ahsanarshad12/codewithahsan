@@ -41,8 +41,8 @@ export default function Testimonials() {
   const goPrev = () => setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length)
 
   return (
-    <section id="testimonials" className="py-24 md:py-32">
-      <div className="max-w-7xl mx-auto px-6" ref={ref}>
+    <section id="testimonials" className="py-24 md:py-32 bg-[#F5F2EE]">
+      <div className="w-full max-w-380 mx-auto px-4 lg:px-12" ref={ref}>
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -51,11 +51,11 @@ export default function Testimonials() {
           className="flex items-end justify-between mb-16"
         >
           <div>
-            <span className="text-xs tracking-[0.3em] text-muted font-body uppercase mb-4 block">
+            <span className="text-xs tracking-[0.3em] text-black/40 font-body uppercase mb-4 block">
               Testimonials
             </span>
             <h2
-              className="font-display font-bold text-ink leading-[0.95]"
+              className="font-display font-bold text-black leading-[0.95]"
               style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)' }}
             >
               TRUSTED BY
@@ -67,14 +67,14 @@ export default function Testimonials() {
           <div className="hidden md:flex gap-3">
             <button
               onClick={goPrev}
-              className="size-10 rounded-full border border-border flex items-center justify-center hover:bg-ink hover:text-cream hover:border-ink transition-all"
+              className="size-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all"
               aria-label="Previous testimonial"
             >
               <ArrowUpRight className="size-4 -rotate-45" />
             </button>
             <button
               onClick={goNext}
-              className="size-10 rounded-full border border-border flex items-center justify-center hover:bg-ink hover:text-cream hover:border-ink transition-all"
+              className="size-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all"
               aria-label="Next testimonial"
             >
               <ArrowUpRight className="size-4 rotate-45" />
@@ -98,31 +98,31 @@ export default function Testimonials() {
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Quote icon */}
-              <Quote className="size-10 text-accent mb-6" />
+              <Quote className="size-10 text-black mb-6" />
 
               {/* Quote text */}
-              <p className="font-body text-2xl md:text-3xl text-ink leading-snug mb-8">
+              <p className="font-body text-2xl md:text-3xl text-black leading-snug mb-8">
                 &ldquo;{testimonials[active].quote}&rdquo;
               </p>
 
               {/* Author row */}
-              <div className="flex items-center gap-4 pb-8 border-b border-border">
-                <div className="size-12 rounded-full bg-ink text-cream flex items-center justify-center font-display font-bold">
+              <div className="flex items-center gap-4 pb-8 border-b border-black/20">
+                <div className="size-12 rounded-full bg-black text-white flex items-center justify-center font-display font-bold">
                   {testimonials[active].avatar}
                 </div>
                 <div>
-                  <h4 className="font-display font-bold text-ink">{testimonials[active].name}</h4>
-                  <p className="font-body text-sm text-muted">{testimonials[active].role}</p>
+                  <h4 className="font-display font-bold text-black">{testimonials[active].name}</h4>
+                  <p className="font-body text-sm text-black/50">{testimonials[active].role}</p>
                 </div>
                 <div className="flex gap-0.5 ml-auto">
                   {Array.from({ length: testimonials[active].rating }).map((_, j) => (
-                    <Star key={j} className="size-4 fill-accent text-accent" />
+                    <Star key={j} className="size-4 fill-black text-black" />
                   ))}
                 </div>
               </div>
 
               {/* Tag */}
-              <p className="font-body text-xs text-muted mt-4">
+              <p className="font-body text-xs text-black/40 mt-4">
                 {testimonials[active].tag}
               </p>
             </motion.div>
@@ -132,14 +132,14 @@ export default function Testimonials() {
           <div className="flex gap-3 mt-6 md:hidden">
             <button
               onClick={goPrev}
-              className="size-10 rounded-full border border-border flex items-center justify-center hover:bg-ink hover:text-cream hover:border-ink transition-all"
+              className="size-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all"
               aria-label="Previous testimonial"
             >
               <ArrowUpRight className="size-4 -rotate-45" />
             </button>
             <button
               onClick={goNext}
-              className="size-10 rounded-full border border-border flex items-center justify-center hover:bg-ink hover:text-cream hover:border-ink transition-all"
+              className="size-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all"
               aria-label="Next testimonial"
             >
               <ArrowUpRight className="size-4 rotate-45" />
@@ -153,7 +153,7 @@ export default function Testimonials() {
                 key={i}
                 onClick={() => setActive(i)}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === active ? 'w-8 bg-accent' : 'w-4 bg-border'
+                  i === active ? 'w-8 bg-black' : 'w-4 bg-black/20'
                 }`}
                 aria-label={`Go to testimonial ${i + 1}`}
               />

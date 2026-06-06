@@ -24,7 +24,7 @@ export default function Home() {
       <AboutStory />
       <Services />
       <TechStack />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <StatsCounter />
       <WorkProcess />
       <ContactForm />

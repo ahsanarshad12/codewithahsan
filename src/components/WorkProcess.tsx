@@ -77,8 +77,8 @@ export default function WorkProcess() {
   const goPrev = () => setActiveStep((prev) => (prev - 1 + steps.length) % steps.length)
 
   return (
-    <section id="process" className="py-24 md:py-32">
-      <div className="max-w-7xl mx-auto px-6" ref={sectionRef}>
+    <section id="process" className="py-24 md:py-32 bg-[#F5F2EE]">
+      <div className="w-full max-w-380 mx-auto px-4 lg:px-12" ref={sectionRef}>
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -86,11 +86,11 @@ export default function WorkProcess() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mb-12"
         >
-          <span className="text-xs tracking-[0.3em] text-muted font-body uppercase mb-4 block">
+          <span className="text-xs tracking-[0.3em] text-black/40 font-body uppercase mb-4 block">
             How I work
           </span>
           <h2
-            className="font-display font-bold text-ink leading-[0.95]"
+            className="font-display font-bold text-black leading-[0.95]"
             style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)' }}
           >
             WORK PROCESS
@@ -112,14 +112,14 @@ export default function WorkProcess() {
                 onClick={() => setActiveStep(i)}
                 className={`relative w-full text-left py-4 px-4 rounded-lg transition-all duration-300 group ${
                   activeStep === i
-                    ? 'bg-ink text-cream'
-                    : 'hover:bg-ink/5'
+                    ? 'bg-black text-white'
+                    : 'hover:bg-black/5'
                 }`}
               >
                 <div className="flex items-center gap-4">
                   <span
                     className={`font-display font-bold text-sm transition-colors duration-300 ${
-                      activeStep === i ? 'text-accent' : 'text-muted'
+                      activeStep === i ? 'text-blue-500' : 'text-black/50'
                     }`}
                   >
                     {step.num}
@@ -127,7 +127,7 @@ export default function WorkProcess() {
                   <div className="flex-1">
                     <span
                       className={`font-display font-semibold text-lg transition-colors duration-300 ${
-                        activeStep === i ? 'text-cream' : 'text-ink'
+                        activeStep === i ? 'text-white' : 'text-black'
                       }`}
                     >
                       {step.title}
@@ -135,7 +135,7 @@ export default function WorkProcess() {
                   </div>
                   <span
                     className={`font-body text-sm transition-colors duration-300 ${
-                      activeStep === i ? 'text-cream/50' : 'text-muted'
+                      activeStep === i ? 'text-white/50' : 'text-black/40'
                     }`}
                   >
                     {step.timeframe}
@@ -148,14 +148,14 @@ export default function WorkProcess() {
             <div className="flex gap-3 mt-6">
               <button
                 onClick={goPrev}
-                className="size-10 rounded-full border border-border flex items-center justify-center hover:bg-ink hover:text-cream hover:border-ink transition-all"
+                className="size-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all"
                 aria-label="Previous step"
               >
                 <ArrowLeft className="size-4" />
               </button>
               <button
                 onClick={goNext}
-                className="size-10 rounded-full border border-border flex items-center justify-center hover:bg-ink hover:text-cream hover:border-ink transition-all"
+                className="size-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all"
                 aria-label="Next step"
               >
                 <ArrowRight className="size-4" />
@@ -172,17 +172,17 @@ export default function WorkProcess() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -30 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="p-6 rounded-xl border border-border bg-card"
+                className="p-6 rounded-xl border border-black/20 bg-white"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="font-display font-bold text-accent text-sm">
+                  <span className="font-display font-bold text-blue-500 text-sm">
                     {steps[activeStep].num}
                   </span>
-                  <h3 className="font-display font-bold text-ink text-2xl">
+                  <h3 className="font-display font-bold text-black text-2xl">
                     {steps[activeStep].title}
                   </h3>
                 </div>
-                <p className="font-body text-muted mb-6">
+                <p className="font-body text-black/60 mb-6">
                   {steps[activeStep].desc}
                 </p>
                 <ul className="space-y-3">
@@ -192,15 +192,15 @@ export default function WorkProcess() {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.1, duration: 0.3 }}
-                      className="flex items-center gap-3 font-body text-sm text-ink"
+                      className="flex items-center gap-3 font-body text-black/60 text-sm"
                     >
-                      <span className="size-1.5 rounded-full bg-accent shrink-0" />
+                      <span className="size-1.5 rounded-full bg-blue-500 shrink-0" />
                       {point}
                     </motion.li>
                   ))}
                 </ul>
-                <div className="mt-6 pt-4 border-t border-border">
-                  <span className="font-body text-xs text-muted">
+                <div className="mt-6 pt-4 border-t border-black/20">
+                  <span className="font-body text-xs text-black/40">
                     Estimated timeframe: {steps[activeStep].timeframe}
                   </span>
                 </div>

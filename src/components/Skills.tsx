@@ -77,25 +77,28 @@ function SkillCard({
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative w-full text-left group overflow-hidden rounded-2xl border transition-all duration-500 ${isActive
-          ? 'bg-ink border-ink'
-          : 'bg-transparent border-border hover:border-ink/30'
-        }`}
+      className={`relative w-full text-left group overflow-hidden rounded-2xl border transition-all duration-500 ${
+        isActive
+          ? 'bg-black border-black'
+          : 'bg-white border-black/20 hover:border-black/30'
+      }`}
       style={{ padding: '28px 28px 24px' }}
     >
       {/* Top row */}
       <div className="flex items-start justify-between mb-8">
         <span
-          className={`font-display text-[11px] tracking-[0.25em] uppercase font-semibold transition-colors duration-300 ${isActive ? 'text-cream/40' : 'text-muted/50'
-            }`}
+          className={`font-display text-[11px] tracking-[0.25em] uppercase font-semibold transition-colors duration-300 ${
+            isActive ? 'text-white/40' : 'text-black/40'
+          }`}
         >
           {skill.number}
         </span>
         <span
-          className={`text-[10px] font-body uppercase tracking-[0.2em] px-2.5 py-1 rounded-full border transition-all duration-300 ${isActive
-              ? 'border-cream/20 text-cream/60'
-              : 'border-border text-muted/60'
-            }`}
+          className={`text-[10px] font-body uppercase tracking-[0.2em] px-2.5 py-1 rounded-full border transition-all duration-300 ${
+            isActive
+              ? 'border-white/20 text-white/60'
+              : 'border-black/20 text-black/60'
+          }`}
         >
           {skill.category}
         </span>
@@ -103,16 +106,17 @@ function SkillCard({
 
       {/* Skill name */}
       <h3
-        className={`font-display font-bold leading-tight mb-4 transition-colors duration-300`}
+        className="font-display font-bold leading-tight mb-4 transition-colors duration-300"
         style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)' }}
       >
-        <span className={isActive ? 'text-cream' : 'text-ink'}>{skill.name}</span>
+        <span className={isActive ? 'text-white' : 'text-black'}>{skill.name}</span>
       </h3>
 
       {/* Progress bar */}
       <div
-        className={`w-full h-[2px] rounded-full mb-4 overflow-hidden transition-colors duration-300 ${isActive ? 'bg-cream/10' : 'bg-border'
-          }`}
+        className={`w-full h-[2px] rounded-full mb-4 overflow-hidden transition-colors duration-300 ${
+          isActive ? 'bg-white/10' : 'bg-black/20'
+        }`}
       >
         <motion.div
           initial={{ width: 0 }}
@@ -136,19 +140,21 @@ function SkillCard({
           {skill.highlights.slice(0, 2).map((h) => (
             <span
               key={h}
-              className={`text-[10px] font-body font-medium transition-colors duration-300 ${isActive ? 'text-cream/50' : 'text-muted/60 group-hover:text-muted'
-                }`}
+              className={`text-[10px] font-body font-medium transition-colors duration-300 ${
+                isActive ? 'text-white/50' : 'text-black/60 group-hover:text-black'
+              }`}
             >
               {h}
               {skill.highlights.indexOf(h) < 1 && (
-                <span className={`ml-1.5 ${isActive ? 'text-cream/20' : 'text-border'}`}>·</span>
+                <span className={`ml-1.5 ${isActive ? 'text-white/20' : 'text-black/40'}`}>·</span>
               )}
             </span>
           ))}
         </div>
         <span
-          className={`font-display font-bold text-sm transition-colors duration-300 ${isActive ? 'text-cream' : 'text-muted/60'
-            }`}
+          className={`font-display font-bold text-sm transition-colors duration-300 ${
+            isActive ? 'text-white' : 'text-black/60'
+          }`}
         >
           {skill.level}%
         </span>
@@ -165,7 +171,7 @@ function SkillCard({
           height="16"
           viewBox="0 0 16 16"
           fill="none"
-          className="text-cream/40"
+          className="text-white/40"
         >
           <path
             d="M3 8h10M9 4l4 4-4 4"
@@ -188,10 +194,10 @@ export default function Skills() {
   const active = activeSkill !== null ? skills[activeSkill] : null
 
   return (
-    <section id="skills" className="py-24 md:py-36 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6" ref={sectionRef}>
+    <section id="skills" className="py-24 md:py-36 overflow-hidden bg-[#F5F2EE]">
+      <div className="w-full max-w-380 mx-auto px-4 lg:px-12" ref={sectionRef}>
 
-        {/* Section Header — editorial, asymmetric */}
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -199,35 +205,38 @@ export default function Skills() {
           className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6"
         >
           <div>
-            <span className="text-xs tracking-[0.3em] text-muted font-body uppercase mb-4 block">
+            <span className="text-xs tracking-[0.3em] text-black/40 font-body uppercase mb-4 block">
               Expertise
             </span>
             <h2
-              className="font-display font-bold text-ink leading-[0.92]"
+              className="font-display font-bold text-black leading-[0.92]"
               style={{ fontSize: 'clamp(2.8rem, 8vw, 6rem)' }}
             >
               MY<br />SKILLS
             </h2>
+            <p className="font-body text-sm text-black/50 mt-4 max-w-md">
+              I've spent years getting good at the tools that actually matter. Not just knowing them using them in production.
+            </p>
           </div>
 
-          {/* Decorative stat */}
+          {/* Decorative stats */}
           <div className="flex items-end gap-4 md:pb-2">
-            <div className="border-l border-border pl-4">
-              <p className="text-[11px] font-body text-muted uppercase tracking-[0.2em] mb-1">Stack depth</p>
+            <div className="border-l border-black/20 pl-4">
+              <p className="text-[11px] font-body text-black/40 uppercase tracking-[0.2em] mb-1">Stack depth</p>
               <p
-                className="font-display font-bold text-ink leading-none"
+                className="font-display font-bold text-black leading-none"
                 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}
               >
-                6 <span className="text-muted font-normal text-lg">areas</span>
+                6 <span className="text-black/40 font-normal text-lg">areas</span>
               </p>
             </div>
-            <div className="border-l border-border pl-4">
-              <p className="text-[11px] font-body text-muted uppercase tracking-[0.2em] mb-1">Avg. proficiency</p>
+            <div className="border-l border-black/20 pl-4">
+              <p className="text-[11px] font-body text-black/40 uppercase tracking-[0.2em] mb-1">Avg. proficiency</p>
               <p
-                className="font-display font-bold text-ink leading-none"
+                className="font-display font-bold text-black leading-none"
                 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}
               >
-                85<span className="text-muted text-lg">%</span>
+                85<span className="text-black/40 text-lg">%</span>
               </p>
             </div>
           </div>
@@ -236,7 +245,7 @@ export default function Skills() {
         {/* Main layout: cards grid + detail panel */}
         <div className="grid lg:grid-cols-[1fr,420px] gap-6 items-start">
 
-          {/* Cards grid — 2 cols on md+ */}
+          {/* Cards grid */}
           <div className="grid sm:grid-cols-2 gap-4">
             {skills.map((skill, i) => (
               <SkillCard
@@ -259,43 +268,43 @@ export default function Skills() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  className="border border-border rounded-2xl overflow-hidden"
+                  className="border border-black/20 rounded-2xl overflow-hidden"
                 >
                   {/* Panel header */}
-                  <div className="bg-ink p-8 pb-10">
+                  <div className="bg-black p-8 pb-10">
                     <div className="flex items-center justify-between mb-6">
-                      <span className="font-display text-[11px] tracking-[0.25em] text-cream/30 uppercase">
+                      <span className="font-display text-[11px] tracking-[0.25em] text-white/30 uppercase">
                         {active.number} / {String(skills.length).padStart(2, '0')}
                       </span>
-                      <span className="text-[10px] font-body uppercase tracking-[0.2em] px-2.5 py-1 rounded-full border border-cream/20 text-cream/50">
+                      <span className="text-[10px] font-body uppercase tracking-[0.2em] px-2.5 py-1 rounded-full border border-white/20 text-white/50">
                         {active.category}
                       </span>
                     </div>
 
                     <h3
-                      className="font-display font-bold text-cream leading-tight mb-3"
+                      className="font-display font-bold text-white leading-tight mb-3"
                       style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)' }}
                     >
                       {active.name}
                     </h3>
-                    <p className="font-body text-cream/60 text-sm leading-relaxed">
+                    <p className="font-body text-white/60 text-sm leading-relaxed">
                       {active.desc}
                     </p>
                   </div>
 
                   {/* Panel body */}
-                  <div className="p-8 bg-transparent">
+                  <div className="p-8 bg-white">
                     {/* Proficiency */}
                     <div className="mb-8">
                       <div className="flex items-center justify-between mb-3">
-                        <span className="text-xs font-body text-muted uppercase tracking-[0.15em]">
+                        <span className="text-xs font-body text-black/40 uppercase tracking-[0.15em]">
                           Proficiency
                         </span>
-                        <span className="font-display font-bold text-ink text-lg">
+                        <span className="font-display font-bold text-black text-lg">
                           {active.level}%
                         </span>
                       </div>
-                      <div className="w-full h-1.5 bg-border rounded-full overflow-hidden">
+                      <div className="w-full h-1.5 bg-black/20 rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
                           animate={{ width: `${active.level}%` }}
@@ -308,7 +317,7 @@ export default function Skills() {
 
                     {/* Highlights */}
                     <div>
-                      <span className="text-xs font-body text-muted uppercase tracking-[0.15em] mb-4 block">
+                      <span className="text-xs font-body text-black/40 uppercase tracking-[0.15em] mb-4 block">
                         Key areas
                       </span>
                       <div className="flex flex-wrap gap-2">
@@ -318,7 +327,7 @@ export default function Skills() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: i * 0.08 + 0.2 }}
-                            className="text-xs font-body font-medium text-ink border border-border px-4 py-2 rounded-full"
+                            className="text-xs font-body font-medium text-black border border-black/20 px-4 py-2 rounded-full"
                           >
                             {h}
                           </motion.span>
@@ -334,17 +343,16 @@ export default function Skills() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="border border-dashed border-border rounded-2xl flex flex-col items-center justify-center text-center"
+                  className="border border-dashed border-black/20 rounded-2xl flex flex-col items-center justify-center text-center"
                   style={{ minHeight: 340, padding: '48px 32px' }}
                 >
-                  {/* Large decorative number */}
                   <p
-                    className="font-display font-bold text-ink/[0.04] leading-none select-none mb-6"
+                    className="font-display font-bold leading-none select-none mb-6 text-black/[0.04]"
                     style={{ fontSize: 'clamp(6rem, 15vw, 10rem)' }}
                   >
                     ?
                   </p>
-                  <p className="font-body text-muted/60 text-sm">
+                  <p className="font-body text-black/40 text-sm">
                     Select a skill to see details
                   </p>
                 </motion.div>

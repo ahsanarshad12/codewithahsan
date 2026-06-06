@@ -19,8 +19,8 @@ export async function POST(request: NextRequest) {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS,
+                user: process.env.MAIL_USER,
+                pass: process.env.MAIL_PASS,
             },
         });
 
@@ -234,15 +234,15 @@ export async function POST(request: NextRequest) {
 
         // Send email to OWNER (you)
         await transporter.sendMail({
-            from: `"CodeWithAhsan" <${process.env.EMAIL_USER}>`,
-            to: process.env.OWNER_EMAIL,
+            from: `"CodeWithAhsan" <${process.env.MAIL_USER}>`,
+            to: process.env.MAIL_USER,
             subject: `🎯 New Project Inquiry: ${projectType} - ${budget} | ${name}`,
             html: ownerEmailTemplate,
         });
 
         // Send confirmation to CLIENT
         await transporter.sendMail({
-            from: `"Ahsan Arshad" <${process.env.EMAIL_USER}>`,
+            from: `"Ahsan Arshad" <${process.env.MAIL_USER}>`,
             to: email,
             subject: `Thanks for your inquiry, ${name}! 🚀`,
             html: clientEmailTemplate,

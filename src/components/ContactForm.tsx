@@ -1,21 +1,34 @@
 'use client'
 
-import { useState } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { useRef } from 'react'
-import { ArrowUpRight, CheckCircle2, Loader2 } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react'
+import { AnimatePresence, motion, useInView } from 'framer-motion'
+import Flag from 'react-country-flag'
 import { sendContactEmail } from '@/app/actions/contact'
 
-const servicesOptions = [
+// ── Types ──────────────────────────────────────────────────────────────────
+type FormState = {
+  name: string
+  email: string
+  dialCode: string
+  whatsappNumber: string
+  service: string
+  budget: string
+  message: string
+}
+
+type FormErrors = Partial<Record<keyof FormState, string>>
+
+// ── Data ───────────────────────────────────────────────────────────────────
+const SERVICES = [
   'Frontend Development',
   'UI / UX Implementation',
   'Landing Page',
   'Full-Stack Development',
   'Performance Audit',
   'Other',
-]
+] as const
 
-const countries = [
+const COUNTRIES = [
   { code: 'PK', dial: '+92', flag: '🇵🇰', name: 'Pakistan' },
   { code: 'US', dial: '+1', flag: '🇺🇸', name: 'United States' },
   { code: 'GB', dial: '+44', flag: '🇬🇧', name: 'United Kingdom' },
@@ -39,40 +52,89 @@ const countries = [
   { code: 'BR', dial: '+55', flag: '🇧🇷', name: 'Brazil' },
   { code: 'MX', dial: '+52', flag: '🇲🇽', name: 'Mexico' },
   { code: 'ZA', dial: '+27', flag: '🇿🇦', name: 'South Africa' },
-  { code: 'KE', dial: '+254', flag: '🇰🇪', name: 'Kenya' },
-  { code: 'GH', dial: '+233', flag: '🇬🇭', name: 'Ghana' },
   { code: 'QA', dial: '+974', flag: '🇶🇦', name: 'Qatar' },
   { code: 'KW', dial: '+965', flag: '🇰🇼', name: 'Kuwait' },
   { code: 'OM', dial: '+968', flag: '🇴🇲', name: 'Oman' },
   { code: 'BH', dial: '+973', flag: '🇧🇭', name: 'Bahrain' },
   { code: 'JO', dial: '+962', flag: '🇯🇴', name: 'Jordan' },
-  { code: 'IQ', dial: '+964', flag: '🇮🇶', name: 'Iraq' },
-  { code: 'LB', dial: '+961', flag: '🇱🇧', name: 'Lebanon' },
   { code: 'MA', dial: '+212', flag: '🇲🇦', name: 'Morocco' },
-  { code: 'DZ', dial: '+213', flag: '🇩🇿', name: 'Algeria' },
-  { code: 'TN', dial: '+216', flag: '🇹🇳', name: 'Tunisia' },
-  { code: 'RU', dial: '+7', flag: '🇷🇺', name: 'Russia' },
   { code: 'CN', dial: '+86', flag: '🇨🇳', name: 'China' },
   { code: 'JP', dial: '+81', flag: '🇯🇵', name: 'Japan' },
   { code: 'KR', dial: '+82', flag: '🇰🇷', name: 'South Korea' },
   { code: 'ID', dial: '+62', flag: '🇮🇩', name: 'Indonesia' },
-]
+] as const
 
-type FormState = {
-  name: string
-  email: string
-  dialCode: string
-  whatsappNumber: string
-  service: string
-  budget: string
-  message: string
+const PILLS = ['🌿 AI Generation', '✦ Floral Design', '🌸 3D Structures'] as const
+
+const IMAGE_SRC = '/img/contact-bgg.jpeg'
+
+// ── Validation ─────────────────────────────────────────────────────────────
+function validate(form: FormState): FormErrors {
+  const errs: FormErrors = {}
+  if (!form.name.trim()) errs.name = 'Name is required'
+  if (!form.email.trim()) errs.email = 'Email is required'
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+    errs.email = 'Enter a valid email'
+  if (!form.whatsappNumber.trim()) errs.whatsappNumber = 'WhatsApp number is required'
+  else if (!/^\d{6,15}$/.test(form.whatsappNumber.replace(/\s/g, '')))
+    errs.whatsappNumber = 'Enter a valid number'
+  if (!form.service) errs.service = 'Please select a service'
+  if (!form.message.trim()) errs.message = 'Tell us about your project'
+  return errs
 }
 
-type FormErrors = Partial<Record<keyof FormState, string>>
+// ── Sub-components ─────────────────────────────────────────────────────────
 
-export default function ContactForm() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+/** Image background */
+function ImageBg() {
+  return (
+    <div className="absolute inset-0 z-0">
+      <img
+        src={IMAGE_SRC}
+        alt="Contact background"
+        className="h-full w-full object-cover"
+      />
+      {/* dark overlay */}
+      <div className="absolute inset-0 bg-black/45" />
+    </div>
+  )
+}
+
+/** Liquid-glass input field */
+function Field({
+  label,
+  error,
+  children,
+}: {
+  label: string
+  error?: string
+  children: React.ReactNode
+}) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <label className="font-[Poppins] text-[10px] uppercase tracking-[0.15em] text-white/40">
+        {label}
+      </label>
+      {children}
+      {error && (
+        <span className="font-[Poppins] text-[11px] text-red-400/90">{error}</span>
+      )}
+    </div>
+  )
+}
+
+/** Glass input shared styles */
+const INPUT_BASE =
+  'w-full rounded-xl bg-white/[0.06] px-3.5 py-2.5 font-[Poppins] text-[13px] text-white placeholder:text-white/25 outline-none ring-1 ring-white/10 transition-all focus:bg-white/[0.09] focus:ring-[1.5px] focus:ring-white/35'
+
+const INPUT_ERROR =
+  'ring-[1.5px] ring-red-400/40 bg-red-500/[0.06]'
+
+// ── Main Component ─────────────────────────────────────────────────────────
+export default function ContactSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const isInView = useInView(sectionRef, { once: true, margin: '-80px' })
+
   const [form, setForm] = useState<FormState>({
     name: '',
     email: '',
@@ -87,44 +149,33 @@ export default function ContactForm() {
   const [loading, setLoading] = useState(false)
   const [serverError, setServerError] = useState('')
 
-  const validate = (): FormErrors => {
-    const errs: FormErrors = {}
-    if (!form.name.trim()) errs.name = 'Name is required'
-    if (!form.email.trim()) errs.email = 'Email is required'
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = 'Enter a valid email'
-    if (!form.whatsappNumber.trim()) errs.whatsappNumber = 'WhatsApp number is required'
-    else if (!/^\d{6,15}$/.test(form.whatsappNumber.replace(/\s/g, '')))
-      errs.whatsappNumber = 'Enter a valid number'
-    if (!form.service) errs.service = 'Please select a service'
-    if (!form.message.trim()) errs.message = 'Tell me about your project'
-    return errs
-  }
-
-  const handleChange = (
+  // clear individual error on change
+  function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-    setErrors((prev) => ({ ...prev, [e.target.name]: undefined }))
+  ) {
+    const { name, value } = e.target
+    setForm((prev) => ({ ...prev, [name]: value }))
+    setErrors((prev) => ({ ...prev, [name]: undefined }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    const errs = validate()
+    const errs = validate(form)
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
+
     setErrors({})
     setServerError('')
     setLoading(true)
+
     try {
-      await sendContactEmail({
-        name: form.name,
-        email: form.email,
-        whatsapp: `${form.dialCode} ${form.whatsappNumber}`,
-        service: form.service,
-        budget: form.budget,
-        message: form.message,
-      })
+      // Replace with your real server action:
+      // await sendContactEmail({ ... })
+      await new Promise((r) => setTimeout(r, 1500)) // mock delay
       setSubmitted(true)
-      setForm({ name: '', email: '', dialCode: '+92', whatsappNumber: '', service: '', budget: '', message: '' })
+      setForm({
+        name: '', email: '', dialCode: '+92',
+        whatsappNumber: '', service: '', budget: '', message: '',
+      })
     } catch {
       setServerError('Something went wrong. Please try again or email me directly.')
     } finally {
@@ -132,211 +183,386 @@ export default function ContactForm() {
     }
   }
 
-  const inputClass = (hasError = false) =>
-    `w-full px-4 py-3 rounded-lg border ${
-      hasError
-        ? 'border-red-400 bg-red-50/50 dark:bg-red-950/20'
-        : 'border-border bg-card'
-    } font-body text-sm text-ink placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent transition-all`
-
+  // ── Render ────────────────────────────────────────────────────────────────
   return (
-    <section id="contact" className="py-24 md:py-32">
-      <div className="max-w-7xl mx-auto px-6" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-16"
-        >
-          <span className="text-xs tracking-[0.3em] text-muted font-body uppercase mb-4 block">
-            Contact Form
-          </span>
-          <h2
-            className="font-display font-bold text-ink leading-[0.95]"
-            style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)' }}
+    <>
+      {/* Google Fonts */}
+      <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,wght@1,400&display=swap');
+
+        /* ── Liquid Glass ── */
+        .liquid-glass {
+          background: rgba(255, 255, 255, 0.01);
+          background-blend-mode: luminosity;
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
+          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+          position: relative;
+          overflow: hidden;
+        }
+        .liquid-glass::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          padding: 1.4px;
+          border-radius: inherit;
+          background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.45) 0%,
+            rgba(255, 255, 255, 0.15) 20%,
+            transparent 40%,
+            transparent 60%,
+            rgba(255, 255, 255, 0.15) 80%,
+            rgba(255, 255, 255, 0.45) 100%
+          );
+          -webkit-mask: linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          pointer-events: none;
+        }
+
+        .liquid-glass-strong {
+          background: rgba(255, 255, 255, 0.04);
+          background-blend-mode: luminosity;
+          backdrop-filter: blur(50px);
+          -webkit-backdrop-filter: blur(50px);
+          box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05),
+            inset 0 1px 1px rgba(255, 255, 255, 0.15);
+          position: relative;
+          overflow: hidden;
+        }
+        .liquid-glass-strong::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          padding: 1.4px;
+          border-radius: inherit;
+          background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.5) 0%,
+            rgba(255, 255, 255, 0.2) 20%,
+            transparent 40%,
+            transparent 60%,
+            rgba(255, 255, 255, 0.2) 80%,
+            rgba(255, 255, 255, 0.5) 100%
+          );
+          -webkit-mask: linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          pointer-events: none;
+        }
+      `}</style>
+
+      <section
+        id="contact"
+        ref={sectionRef}
+        className="relative min-h-screen overflow-hidden flex items-center"
+      >
+        {/* Image background */}
+        <ImageBg />
+
+        {/* Content */}
+        <div className="relative z-10 w-full max-w-380 mx-auto px-4 lg:px-12 py-6 lg:py-12">
+
+          {/* ── Header ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-14"
           >
-            LET&apos;S TALK
-          </h2>
-          <p className="font-body text-muted text-base mt-3 max-w-md">
-            Got a project in mind? Fill in the form and I&apos;ll get back to you within 24 hours.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="grid md:grid-cols-2 gap-12"
-        >
-          <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-            {/* Name + Email */}
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="name" className="font-body text-xs text-muted uppercase tracking-wide mb-1.5 block">
-                  Name *
-                </label>
-                <input
-                  id="name" name="name" type="text" placeholder="John Doe"
-                  value={form.name} onChange={handleChange}
-                  className={inputClass(!!errors.name)}
-                />
-                {errors.name && <p className="text-red-500 text-xs mt-1 font-body">{errors.name}</p>}
-              </div>
-              <div>
-                <label htmlFor="email" className="font-body text-xs text-muted uppercase tracking-wide mb-1.5 block">
-                  Email *
-                </label>
-                <input
-                  id="email" name="email" type="email" placeholder="hello@client.com"
-                  value={form.email} onChange={handleChange}
-                  className={inputClass(!!errors.email)}
-                />
-                {errors.email && <p className="text-red-500 text-xs mt-1 font-body">{errors.email}</p>}
-              </div>
-            </div>
-
-            {/* WhatsApp */}
-            <div>
-              <label className="font-body text-xs text-muted uppercase tracking-wide mb-1.5 block">
-                WhatsApp *
-              </label>
-              <div className={`flex rounded-lg border overflow-hidden ${errors.whatsappNumber ? 'border-red-400' : 'border-border'} focus-within:ring-2 focus-within:ring-accent/40 focus-within:border-accent transition-all`}>
-                <select
-                  name="dialCode"
-                  value={form.dialCode}
-                  onChange={handleChange}
-                  className="bg-card text-ink text-sm font-body px-2 py-3 border-r border-border focus:outline-none cursor-pointer"
-                  style={{ minWidth: '90px' }}
-                >
-                  {countries.map((c) => (
-                    <option key={c.code} value={c.dial}>
-                      {c.flag} {c.dial}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  name="whatsappNumber"
-                  type="tel"
-                  placeholder="3001234567"
-                  value={form.whatsappNumber}
-                  onChange={handleChange}
-                  className="flex-1 px-4 py-3 bg-card text-ink text-sm font-body placeholder:text-muted/50 focus:outline-none"
-                />
-              </div>
-              {errors.whatsappNumber && (
-                <p className="text-red-500 text-xs mt-1 font-body">{errors.whatsappNumber}</p>
-              )}
-            </div>
-
-            {/* Service */}
-            <div>
-              <label htmlFor="service" className="font-body text-xs text-muted uppercase tracking-wide mb-1.5 block">
-                Service *
-              </label>
-              <select
-                id="service" name="service" value={form.service} onChange={handleChange}
-                className={inputClass(!!errors.service)}
-              >
-                <option value="">Select a service…</option>
-                {servicesOptions.map((s) => <option key={s} value={s}>{s}</option>)}
-              </select>
-              {errors.service && <p className="text-red-500 text-xs mt-1 font-body">{errors.service}</p>}
-            </div>
-
-            {/* Budget */}
-            <div>
-              <label htmlFor="budget" className="font-body text-xs text-muted uppercase tracking-wide mb-1.5 block">
-                Budget (optional)
-              </label>
-              <input
-                id="budget" name="budget" type="text" placeholder="$2,000 – $5,000"
-                value={form.budget} onChange={handleChange}
-                className={inputClass()}
-              />
-            </div>
-
-            {/* Message */}
-            <div>
-              <label htmlFor="message" className="font-body text-xs text-muted uppercase tracking-wide mb-1.5 block">
-                Project Details *
-              </label>
-              <textarea
-                id="message" name="message" rows={5}
-                placeholder="Tell me about your project, timeline, and key goals…"
-                value={form.message} onChange={handleChange}
-                className={inputClass(!!errors.message) + ' resize-none'}
-              />
-              {errors.message && <p className="text-red-500 text-xs mt-1 font-body">{errors.message}</p>}
-            </div>
-
-            {serverError && (
-              <p className="text-red-500 text-sm font-body">{serverError}</p>
-            )}
-
-            <button
-              type="submit" disabled={loading}
-              className="group inline-flex items-center gap-2 bg-accent text-cream px-8 py-3.5 rounded-full text-sm font-medium hover:bg-accent/90 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+            <span className="font-[Poppins] text-[11px] tracking-[0.3em] uppercase text-white/40 block mb-3">
+              Get in touch
+            </span>
+            <h2
+              className="font-[Poppins] font-medium text-white leading-[0.95] tracking-[-0.05em]"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
             >
-              {loading ? (
-                <><Loader2 className="size-4 animate-spin" />Sending…</>
-              ) : (
-                <>Send Message<ArrowUpRight className="size-4 transition-transform group-hover:rotate-45" /></>
-              )}
-            </button>
-          </form>
+              LET&rsquo;S{' '}
+              <em
+                style={{
+                  fontFamily: "'Source Serif 4', serif",
+                  fontStyle: 'italic',
+                  color: 'rgba(255,255,255,0.7)',
+                  fontWeight: 400,
+                }}
+              >
+                bloom
+              </em>
+              <br />TOGETHER
+            </h2>
+            <p className="font-[Poppins] text-white/45 text-sm mt-3 max-w-sm leading-relaxed">
+              Got a project in mind? Fill in the form and I&rsquo;ll get back to you within 24 hours.
+            </p>
+          </motion.div>
 
-          {/* Right column */}
-          <div className="flex flex-col justify-start">
-            <AnimatePresence mode="wait">
-              {submitted ? (
-                <motion.div
-                  key="success"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="bg-accent/10 border border-accent/20 rounded-2xl p-8 md:p-10 h-fit"
-                >
-                  <CheckCircle2 className="size-10 text-accent mb-4" />
-                  <h3 className="font-display font-bold text-ink text-2xl mb-2">Message sent!</h3>
-                  <p className="font-body text-muted text-sm leading-relaxed">
-                    Thanks for reaching out. I&apos;ll review your project details and get back to you within 24 hours.
-                  </p>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="mt-6 text-sm font-body text-accent hover:underline"
+          {/* ── Grid ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="grid md:grid-cols-2 gap-8 items-start"
+          >
+
+            {/* ── LEFT: Form Panel ── */}
+            <div className="liquid-glass-strong rounded-3xl p-7">
+              <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+
+                {/* Name + Email row */}
+                <div className="grid grid-cols-2 gap-3">
+                  <Field label="Name *" error={errors.name}>
+                    <input
+                      name="name"
+                      type="text"
+                      placeholder="John Doe"
+                      value={form.name}
+                      onChange={handleChange}
+                      className={`${INPUT_BASE} ${errors.name ? INPUT_ERROR : ''}`}
+                    />
+                  </Field>
+                  <Field label="Email *" error={errors.email}>
+                    <input
+                      name="email"
+                      type="email"
+                      placeholder="hello@client.com"
+                      value={form.email}
+                      onChange={handleChange}
+                      className={`${INPUT_BASE} ${errors.email ? INPUT_ERROR : ''}`}
+                    />
+                  </Field>
+                </div>
+
+                {/* WhatsApp */}
+                <Field label="WhatsApp *" error={errors.whatsappNumber}>
+                  <div
+                    className={`flex rounded-xl overflow-hidden ring-1 transition-all focus-within:ring-[1.5px] focus-within:ring-white/35 ${
+                      errors.whatsappNumber ? 'ring-red-400/40' : 'ring-white/10'
+                    }`}
                   >
-                    Send another message
-                  </button>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="info" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                  className="space-y-6"
-                >
-                  <p className="font-body text-muted text-base leading-relaxed">
-                    Whether it&apos;s a landing page, dashboard, or full-stack build — I&apos;m open to freelance work and flexible collaborations.
-                  </p>
-                  <div className="space-y-4">
-                    <div>
-                      <p className="font-body text-xs text-muted uppercase tracking-wide mb-1">Response Time</p>
-                      <p className="font-display font-bold text-ink">&lt; 24 hours</p>
-                    </div>
-                    <div>
-                      <p className="font-body text-xs text-muted uppercase tracking-wide mb-1">Email</p>
-                      <p className="font-body text-sm text-ink">ahsanarshad291@gmail.com</p>
-                    </div>
-                    <div>
-                      <p className="font-body text-xs text-muted uppercase tracking-wide mb-1">Location</p>
-                      <p className="font-body text-sm text-ink">Rahim Yar Khan, Punjab, PK</p>
-                    </div>
+                    <select
+                      name="dialCode"
+                      value={form.dialCode}
+                      onChange={handleChange}
+                      className="bg-white/[0.04] text-white text-[12px] font-[Poppins] px-2 py-2.5 border-r border-white/10 outline-none cursor-pointer"
+                      style={{ minWidth: 82 }}
+                    >
+                      {COUNTRIES.map((c) => (
+                        <option
+                          key={`${c.code}-${c.dial}`}
+                          value={c.dial}
+                          style={{ background: '#0d0d1a' }}
+                        >
+                          {c.flag} {c.dial}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      name="whatsappNumber"
+                      type="tel"
+                      placeholder="3001234567"
+                      value={form.whatsappNumber}
+                      onChange={handleChange}
+                      className="flex-1 bg-white/[0.06] text-white text-[13px] font-[Poppins] px-3.5 py-2.5 placeholder:text-white/25 outline-none"
+                    />
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </motion.div>
-      </div>
-    </section>
+                </Field>
+
+                {/* Service */}
+                <Field label="Service *" error={errors.service}>
+                  <select
+                    name="service"
+                    value={form.service}
+                    onChange={handleChange}
+                    className={`${INPUT_BASE} ${errors.service ? INPUT_ERROR : ''}`}
+                    style={{ color: form.service ? '#fff' : 'rgba(255,255,255,0.25)' }}
+                  >
+                    <option value="" style={{ background: '#0d0d1a' }}>
+                      Select a service…
+                    </option>
+                    {SERVICES.map((s) => (
+                      <option key={s} value={s} style={{ background: '#0d0d1a', color: '#fff' }}>
+                        {s}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+
+                {/* Budget */}
+                <Field label="Budget (optional)">
+                  <input
+                    name="budget"
+                    type="text"
+                    placeholder="$2,000 – $5,000"
+                    value={form.budget}
+                    onChange={handleChange}
+                    className={INPUT_BASE}
+                  />
+                </Field>
+
+                {/* Message */}
+                <Field label="Project Details *" error={errors.message}>
+                  <textarea
+                    name="message"
+                    rows={5}
+                    placeholder="Tell me about your project, timeline, and key goals…"
+                    value={form.message}
+                    onChange={handleChange}
+                    className={`${INPUT_BASE} resize-none ${errors.message ? INPUT_ERROR : ''}`}
+                  />
+                </Field>
+
+                {serverError && (
+                  <p className="font-[Poppins] text-[12px] text-red-400/90">{serverError}</p>
+                )}
+
+                {/* Submit */}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="liquid-glass-strong group inline-flex items-center gap-2 self-start rounded-full px-7 py-3 font-[Poppins] text-[13px] font-medium text-white transition-transform hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {loading ? (
+                    <>
+                      <span className="inline-block animate-spin">⟳</span>
+                      Sending…
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/15 text-xs transition-transform group-hover:rotate-45">
+                        ↗
+                      </span>
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+
+            {/* ── RIGHT column ── */}
+            <div className="flex flex-col gap-5">
+              <AnimatePresence mode="wait">
+                {submitted ? (
+                  /* Success card */
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="liquid-glass-strong rounded-3xl p-8"
+                  >
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-xl">
+                      ✦
+                    </div>
+                    <h3 className="font-[Poppins] font-medium text-white text-2xl mb-2">
+                      Message sent!
+                    </h3>
+                    <p className="font-[Poppins] text-white/55 text-[13px] leading-relaxed mb-5">
+                      Thanks for reaching out. I&rsquo;ll review your project details and get back
+                      to you within 24 hours.
+                    </p>
+                    <button
+                      onClick={() => setSubmitted(false)}
+                      className="font-[Poppins] text-[12px] text-white/50 underline bg-transparent border-none cursor-pointer p-0"
+                    >
+                      Send another message
+                    </button>
+                  </motion.div>
+                ) : (
+                  /* Info panel */
+                  <motion.div
+                    key="info"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex flex-col gap-5"
+                  >
+                    {/* Pills */}
+                    <div className="flex flex-wrap gap-2">
+                      {PILLS.map((p) => (
+                        <span
+                          key={p}
+                          className="liquid-glass rounded-full px-4 py-1.5 font-[Poppins] text-[11px] text-white/70"
+                        >
+                          {p}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Info body */}
+                    <div className="liquid-glass rounded-2xl p-5 font-[Poppins] text-[13px] text-white/55 leading-relaxed">
+                      Whether it&rsquo;s a landing page, dashboard, or full-stack build — I&rsquo;m
+                      open to freelance work and flexible collaborations within the{' '}
+                      <em
+                        style={{
+                          fontFamily: "'Source Serif 4', serif",
+                          fontStyle: 'italic',
+                        }}
+                      >
+                        bloom
+                      </em>{' '}
+                      ecosystem and beyond.
+                    </div>
+
+                    {/* Details */}
+                    <div className="flex flex-col gap-4 pl-1">
+                      {[
+                        { label: 'Response Time', value: '< 24 hours', large: true },
+                        { label: 'Email', value: 'ahsanarshad291@gmail.com', large: false },
+                        { label: 'Location', value: 'Rahim Yar Khan, Punjab, PK', large: false },
+                      ].map(({ label, value, large }) => (
+                        <div key={label}>
+                          <p className="font-[Poppins] text-[10px] uppercase tracking-[0.15em] text-white/40 mb-0.5">
+                            {label}
+                          </p>
+                          <p
+                            className={`font-[Poppins] text-white ${
+                              large ? 'font-medium text-base' : 'text-[13px]'
+                            }`}
+                          >
+                            {value}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Quote block */}
+              <div className="liquid-glass rounded-2xl p-5 text-center">
+                <span className="font-[Poppins] text-[9px] uppercase tracking-[0.35em] text-white/40 block mb-3">
+                  Visionary Design
+                </span>
+                <p className="font-[Poppins] text-[13px] text-white/85 leading-relaxed mb-4">
+                  &ldquo;We imagined a realm{' '}
+                  <em
+                    style={{
+                      fontFamily: "'Source Serif 4', serif",
+                      fontStyle: 'italic',
+                      color: 'rgba(255,255,255,0.6)',
+                    }}
+                  >
+                    with no ending
+                  </em>{' '}
+                  — where every petal is a new possibility.&rdquo;
+                </p>
+                <div className="flex items-center justify-center gap-2">
+                  <span className="h-px flex-1 max-w-[50px] bg-white/15" />
+                  <span className="font-[Poppins] text-[9px] uppercase tracking-[0.25em] text-white/40">
+                    Marcus Aurelio
+                  </span>
+                  <span className="h-px flex-1 max-w-[50px] bg-white/15" />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </>
   )
 }

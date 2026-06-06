@@ -17,8 +17,8 @@ export async function POST(request: NextRequest) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER, // Your Gmail
-        pass: process.env.EMAIL_PASS, // App Password (not regular password)
+        user: process.env.MAIL_USER, // Your Gmail
+        pass: process.env.MAIL_PASS, // App Password (not regular password)
       },
     });
 
@@ -133,7 +133,7 @@ export async function POST(request: NextRequest) {
 
     // Send email
     await transporter.sendMail({
-      from: `"Ahsan Arshad" <${process.env.EMAIL_USER}>`,
+      from: `"Ahsan Arshad" <${process.env.MAIL_USER}>`,
       to: email,
       subject: '🚀 Welcome! Here are My Services - CodeWithAhsan',
       html: servicesEmailTemplate,
