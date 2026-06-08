@@ -14,8 +14,8 @@ const services = [
   {
     num: '02',
     title: 'UI Implementation',
-    desc: 'Pixel-perfect translation of Figma designs into clean, accessible interfaces — responsive, semantic HTML/CSS, and production-grade Tailwind.',
-    tags: ['Tailwind', 'CSS3', 'Figma to Code'],
+    desc: 'Pixel-perfect translation of designs into clean, accessible interfaces, responsive, semantic HTML/CSS, and production-grade Tailwind CSS.',
+    tags: ['HTML', 'CSS3', 'Tailwind', 'Next.js', 'Responsive UI'],
   },
   {
     num: '03',
@@ -37,9 +37,9 @@ const services = [
   },
   {
     num: '06',
-    title: 'Landing Pages & Web Apps',
-    desc: 'Conversion-oriented landing pages and full-featured web apps built with modern frameworks, optimized for performance and user experience.',
-    tags: ['Landing Pages', 'Web Apps', 'Freelance'],
+    title: 'Full-Stack Web Solutions',
+    desc: 'From conversion-focused landing pages to full-featured web apps built with Next.js, Laravel & MySQL. Clean architecture, fast delivery, and real results.',
+    tags: ['Landing Pages', 'Web Apps', 'Next.js', 'Laravel', 'MySQL'],
   },
 ]
 
@@ -48,62 +48,62 @@ export default function Services() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-      <section id="services" className="py-24 md:py-32 bg-[#F5F2EE]">
-        <div className="w-full max-w-380 mx-auto px-4 lg:px-12" ref={ref}>
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-12"
+    <section id="services" className="py-24 md:py-32 bg-[#F5F2EE]">
+      <div className="w-full max-w-380 mx-auto px-4 lg:px-12" ref={ref}>
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-12"
+        >
+          <span className="text-xs tracking-[0.3em] text-black/50 font-body uppercase mb-4 block">
+            Services / Offerings
+          </span>
+          <h2
+            className="font-display font-bold text-black leading-[0.95]"
+            style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)' }}
           >
-            <span className="text-xs tracking-[0.3em] text-black/50 font-body uppercase mb-4 block">
-              Services / Offerings
-            </span>
-            <h2
-              className="font-display font-bold text-black leading-[0.95]"
-              style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)' }}
-            >
-              WHAT I DO
-            </h2>
-          </motion.div>
+            WHAT I DO
+          </h2>
+        </motion.div>
 
-          {/* Service cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {services.map((service, i) => (
-              <motion.div
-                key={service.num}
-                initial={{ opacity: 0, y: 40 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="group p-6 md:p-8 rounded-xl border border-black/20 bg-white hover:border-black/40 transition-all duration-500 hover:shadow-lg hover:shadow-black/5"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <span className="font-display font-bold text-black text-sm">
-                    {service.num}
+        {/* Service cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          {services.map((service, i) => (
+            <motion.div
+              key={service.num}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="group p-6 md:p-8 rounded-xl border border-black/20 bg-white hover:border-black/40 transition-all duration-500 hover:shadow-lg hover:shadow-black/5"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <span className="font-display font-bold text-black text-sm">
+                  {service.num}
+                </span>
+                <ArrowUpRight className="size-5 text-black group-hover:text-black group-hover:rotate-45 transition-all duration-300" />
+              </div>
+              <h3 className="font-display font-bold text-black text-xl mb-3">
+                {service.title}
+              </h3>
+              <p className="font-body text-black/60 text-sm leading-relaxed mb-5">
+                {service.desc}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {service.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs font-body text-black/60 border border-black/20 px-2.5 py-1 rounded-full"
+                  >
+                    {tag}
                   </span>
-                  <ArrowUpRight className="size-5 text-black group-hover:text-black group-hover:rotate-45 transition-all duration-300" />
-                </div>
-                <h3 className="font-display font-bold text-black text-xl mb-3">
-                  {service.title}
-                </h3>
-                <p className="font-body text-black/60 text-sm leading-relaxed mb-5">
-                  {service.desc}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {service.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs font-body text-black/60 border border-black/20 px-2.5 py-1 rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </section>
-    )
+      </div>
+    </section>
+  )
 }

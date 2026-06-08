@@ -25,11 +25,11 @@ const skills = [
   {
     name: 'UI Implementation',
     shortName: 'UI / UX',
-    desc: 'Translating Figma designs into pixel-perfect, accessible interfaces with a sharp eye for detail.',
+    desc: 'Translating designs into pixel-perfect, accessible interfaces with a sharp eye for spacing, typography, and detail.',
     level: 88,
     category: 'Frontend',
     number: '03',
-    highlights: ['Responsive Design', 'A11y', 'Figma → Code'],
+    highlights: ['Responsive Design',   'Figma → Code'],
   },
   {
     name: 'Tailwind CSS',

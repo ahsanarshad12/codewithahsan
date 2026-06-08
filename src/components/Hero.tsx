@@ -308,7 +308,7 @@ export default function Hero() {
             style={{ color: "rgba(226,232,240,0.5)", fontFamily: "'DM Sans', sans-serif", }}
           >
 
-            I turn complex ideas into clean, fast interfaces the kind users actually enjoy using. From pixel perfect layouts to smooth interactions, I build frontend experiences that feel right.
+            I turn complex ideas into clean, fast interfaces the kind users actually enjoy using. From pixel-perfect layouts to smooth interactions, I build frontend experiences with React, Next.js & Tailwind that perform as good as they look.
 
           </p>
 
