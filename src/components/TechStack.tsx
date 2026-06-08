@@ -78,13 +78,7 @@ const stacks = [
     description: 'Git-based platform for source control, collaboration, and CI/CD workflows.',
     icon: SiGithub,
   },
-  {
-    name: 'Figma',
-    category: 'Design Tool',
-    color: '#F24E1E',
-    description: 'UI/UX design and prototyping — Figma to React with pixel-perfect handoff.',
-    icon: SiFigma,
-  },
+  
 ]
 
 function TechCard({ stack, i }: { stack: (typeof stacks)[0]; i: number }) {

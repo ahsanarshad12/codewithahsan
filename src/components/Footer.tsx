@@ -4,7 +4,6 @@ import { ArrowUpRight } from 'lucide-react'
 
 const socialLinks = [
   { label: 'LinkedIn', href: 'https://linkedin.com/in/codewithahsan' },
-  { label: 'GitHub', href: 'https://github.com/codewithahsan' },
   { label: 'Email', href: 'mailto:ahsanarshad291@gmail.com' },
 ]
 
