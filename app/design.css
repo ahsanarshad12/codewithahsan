@@ -1,0 +1,189 @@
+
+    /* Subtle paper texture using SVG noise pattern */
+    .bg-paper-texture {
+      background-color: #f7f4ec;
+      background-image: radial-gradient(#d6cfbe 0.75px, transparent 0.75px), radial-gradient(#d6cfbe 0.75px, #f7f4ec 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+    }
+
+    .bg-purple-noise {
+      background-color: #3b278c;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    /* Torn Paper Divider Masks */
+    .torn-paper-edge-bottom {
+      filter: drop-shadow(0px 8px 6px rgba(0, 0, 0, 0.22));
+    }
+
+    /* Washi tape effect */
+    .washi-tape {
+      background: rgba(255, 253, 208, 0.85);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      position: relative;
+      border-left: 2px dashed rgba(200, 190, 150, 0.4);
+      border-right: 2px dashed rgba(200, 190, 150, 0.4);
+      backdrop-filter: blur(1px);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+    }
+    .washi-tape:hover {
+      transform: scale(1.05) translateY(-2px) rotate(1deg);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    
+    .washi-tape-purple {
+      background: rgba(216, 204, 254, 0.82);
+      border-left: 2px dashed rgba(160, 140, 230, 0.5);
+      border-right: 2px dashed rgba(160, 140, 230, 0.5);
+    }
+
+    /* Realistic Badge Lanyard String */
+    .lanyard-strap {
+      background: linear-gradient(90deg, #432e9f 0%, #5e41df 50%, #342183 100%);
+      box-shadow: inset 0 0 4px rgba(0,0,0,0.4), 2px 4px 6px rgba(0,0,0,0.25);
+    }
+
+    /* Card rotation utilities */
+    .tilt-left-sm { transform: rotate(-2deg); }
+    .tilt-right-sm { transform: rotate(2deg); }
+    .tilt-left-md { transform: rotate(-4.5deg); }
+    .tilt-right-md { transform: rotate(4.5deg); }
+
+    /* Custom Animations */
+    @keyframes lanyard-sway {
+      0%, 100% {
+        transform: rotate(-1.5deg);
+      }
+      50% {
+        transform: rotate(2deg);
+      }
+    }
+    .animate-lanyard-sway {
+      transform-origin: top center;
+      animation: lanyard-sway 6.5s ease-in-out infinite;
+    }
+
+    @keyframes float-slow {
+      0%, 100% {
+        transform: translateY(0px) rotate(-4.5deg);
+      }
+      50% {
+        transform: translateY(-8px) rotate(-1deg);
+      }
+    }
+    .animate-float-slow {
+      animation: float-slow 4.5s ease-in-out infinite;
+    }
+
+    @keyframes airplane-glide {
+      0%, 100% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-6px) translateX(4px) rotate(2deg);
+      }
+    }
+    .animate-airplane {
+      animation: airplane-glide 4s ease-in-out infinite;
+    }
+
+    @keyframes sparkle-pulse {
+      0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.9;
+      }
+      50% {
+        transform: scale(1.25) rotate(15deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 6px rgba(253, 224, 71, 0.8));
+      }
+    }
+    .animate-sparkle {
+      animation: sparkle-pulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes crown-wobble {
+      0%, 100% {
+        transform: rotate(4.5deg) translateY(0);
+      }
+      50% {
+        transform: rotate(9deg) translateY(-4px) scale(1.06);
+      }
+    }
+    .animate-crown {
+      animation: crown-wobble 3s ease-in-out infinite;
+    }
+
+    /* Spring micro-interactions for buttons */
+    .btn-spring {
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+    }
+    .btn-spring:hover {
+      transform: translateY(-3px) scale(1.02);
+    }
+    .btn-spring:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    /* Scroll reveal transitions */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-on-scroll.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Selected Work cards 3D tilt & smooth spring */
+    .work-poster-card {
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+      will-change: transform;
+    }
+    .work-poster-card:hover {
+      transform: translateY(-8px) scale(1.02) rotate(0deg) !important;
+      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.35), 6px 8px 0 #11092b !important;
+    }
+
+    /* Accessible motion respects */
+    @media (prefers-reduced-motion: reduce) {
+      .animate-lanyard-sway,
+      .animate-float-slow,
+      .animate-airplane,
+      .animate-sparkle,
+      .animate-crown {
+        animation: none !important;
+      }
+      .reveal-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  
+
+    /* Playful cutout letters with dark border & bouncy hover physics */
+    .letter-cutout {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #5535cf;
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      text-shadow: 2px 2px 0 #1b0e45;
+      box-shadow: 4px 5px 0 #140b33;
+      border: 3px solid #140b33;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-color 0.2s ease;
+    }
+    .letter-cutout:hover {
+      transform: translateY(-8px) scale(1.12) rotate(4deg) !important;
+      box-shadow: 6px 10px 0 #140b33;
+      filter: brightness(1.1);
+    }
+  
