@@ -256,7 +256,7 @@ export default function Contact() {
                     </span>
                     <span className="desktop-copy">
                       {
-                        "\n                    Rahim Yar Khan, Punjab, Pakistan (Remote Worldwide)\n                  "
+                        "\n                    Lahore, Punjab, Pakistan (Remote Worldwide)\n                  "
                       }
                     </span>
                   </span>
